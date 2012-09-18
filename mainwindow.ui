@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>420</width>
+    <height>432</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>420</width>
+    <height>432</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>420</width>
+    <height>432</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>420</width>
+     <height>377</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>420</width>
+     <height>377</height>
+    </size>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
+      <item>
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMaximumSize</enum>
+        </property>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Cards</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Applications</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Files</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>File Info</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMaximumSize</enum>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QListWidget" name="cardList"/>
+        </item>
+        <item>
+         <widget class="QListWidget" name="applicationList"/>
+        </item>
+        <item>
+         <widget class="QListWidget" name="fileList"/>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="fileInfo">
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinimumSize</enum>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QToolButton" name="buttonSave">
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="buttonDelete">
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="buttonPrintxD">
+          <property name="text">
+           <string>Print?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="buttonIncrease">
+          <property name="text">
+           <string>increase</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="buttonDecrease">
+          <property name="text">
+           <string>decrease</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="textEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>197</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>420</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuProgram">
+    <property name="title">
+     <string>Program</string>
+    </property>
+    <addaction name="actionDevice"/>
+    <addaction name="actionScan"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuCard">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Card</string>
+    </property>
+    <addaction name="actionCard_Info"/>
+    <addaction name="actionFree_Memory"/>
+    <addaction name="actionFormat_PICC"/>
+    <addaction name="actionSet_Default_Key"/>
+    <addaction name="actionCreate_Application"/>
+    <addaction name="actionConfiguration"/>
+   </widget>
+   <widget class="QMenu" name="menuApplication">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Application</string>
+    </property>
+    <widget class="QMenu" name="menuCreate_File">
+     <property name="title">
+      <string>Create File</string>
+     </property>
+     <addaction name="actionStandard_File"/>
+     <addaction name="actionBackup_File"/>
+     <addaction name="actionValue_File"/>
+     <addaction name="actionLinear_Record_File"/>
+     <addaction name="actionCyclic_Record_File"/>
+    </widget>
+    <addaction name="actionKey_Settings_info"/>
+    <addaction name="actionAuthenticate"/>
+    <addaction name="actionChange_Key_Settings"/>
+    <addaction name="actionDelete_Application"/>
+    <addaction name="menuCreate_File"/>
+   </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionDelete_File"/>
+    <addaction name="actionCommit_Transaction"/>
+    <addaction name="actionAbort_Transaction"/>
+    <addaction name="actionRead_Data"/>
+    <addaction name="actionWrite_Data"/>
+    <addaction name="actionGet_Value"/>
+    <addaction name="actionCredit"/>
+    <addaction name="actionDebit"/>
+    <addaction name="actionLimited_Credit"/>
+    <addaction name="actionWrite_Record"/>
+    <addaction name="actionRead_Record"/>
+    <addaction name="actionClear_Record_File"/>
+   </widget>
+   <addaction name="menuProgram"/>
+   <addaction name="menuCard"/>
+   <addaction name="menuApplication"/>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionCard_Info">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Card Info</string>
+   </property>
+  </action>
+  <action name="actionScan">
+   <property name="text">
+    <string>Scan</string>
+   </property>
+  </action>
+  <action name="actionFree_Memory">
+   <property name="text">
+    <string>Free Memory</string>
+   </property>
+  </action>
+  <action name="actionFormat_PICC">
+   <property name="text">
+    <string>Format PICC</string>
+   </property>
+  </action>
+  <action name="actionSet_Default_Key">
+   <property name="text">
+    <string>Set Default Key</string>
+   </property>
+  </action>
+  <action name="actionDevice">
+   <property name="text">
+    <string>Device...</string>
+   </property>
+  </action>
+  <action name="actionKey_Settings_info">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Key Settings Info</string>
+   </property>
+  </action>
+  <action name="actionAuthenticate">
+   <property name="text">
+    <string>Authenticate</string>
+   </property>
+  </action>
+  <action name="actionChange_Key_Settings">
+   <property name="text">
+    <string>Change Key Settings</string>
+   </property>
+  </action>
+  <action name="actionCreate_Application">
+   <property name="text">
+    <string>Create Application</string>
+   </property>
+  </action>
+  <action name="actionDelete_Application">
+   <property name="text">
+    <string>Delete Application</string>
+   </property>
+  </action>
+  <action name="actionGet_File_Settings">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>File Settings...</string>
+   </property>
+  </action>
+  <action name="actionDelete_File">
+   <property name="text">
+    <string>Delete File</string>
+   </property>
+  </action>
+  <action name="actionCommit_Transaction">
+   <property name="text">
+    <string>Commit Transaction</string>
+   </property>
+  </action>
+  <action name="actionAbort_Transaction">
+   <property name="text">
+    <string>Abort Transaction</string>
+   </property>
+  </action>
+  <action name="actionRead_Data">
+   <property name="text">
+    <string>Read Data</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionWrite_Data">
+   <property name="text">
+    <string>Write Data</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionGet_Value">
+   <property name="text">
+    <string>get Value</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionCredit">
+   <property name="text">
+    <string>Credit</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionDebit">
+   <property name="text">
+    <string>Debit</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionLimited_Credit">
+   <property name="text">
+    <string>Limited Credit</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionWrite_Record">
+   <property name="text">
+    <string>Write Record</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRead_Record">
+   <property name="text">
+    <string>Read Record</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionClear_Record_File">
+   <property name="text">
+    <string>Clear Record File</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionConfiguration">
+   <property name="text">
+    <string>Configuration</string>
+   </property>
+  </action>
+  <action name="actionStandard_File">
+   <property name="text">
+    <string>Standard File</string>
+   </property>
+  </action>
+  <action name="actionBackup_File">
+   <property name="text">
+    <string>Backup File</string>
+   </property>
+  </action>
+  <action name="actionValue_File">
+   <property name="text">
+    <string>Value File</string>
+   </property>
+  </action>
+  <action name="actionLinear_Record_File">
+   <property name="text">
+    <string>Linear Record File</string>
+   </property>
+  </action>
+  <action name="actionCyclic_Record_File">
+   <property name="text">
+    <string>Cyclic Record File</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>241</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDevice</sender>
+   <signal>triggered()</signal>
+   <receiver>textEdit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDevice</sender>
+   <signal>triggered()</signal>
+   <receiver>cardList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>50</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDevice</sender>
+   <signal>triggered()</signal>
+   <receiver>applicationList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDevice</sender>
+   <signal>triggered()</signal>
+   <receiver>fileList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>applicationList</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>fileList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cardList</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>applicationList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cardList</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>fileList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionScan</sender>
+   <signal>triggered()</signal>
+   <receiver>cardList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>50</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionScan</sender>
+   <signal>triggered()</signal>
+   <receiver>applicationList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionScan</sender>
+   <signal>triggered()</signal>
+   <receiver>fileList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileList</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>textEdit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAuthenticate</sender>
+   <signal>triggered()</signal>
+   <receiver>fileList</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cardList</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>fileInfo</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>359</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>applicationList</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>fileInfo</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>359</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
