@@ -46,7 +46,7 @@ int CRecordFile::createFile() {
 
 int CRecordFile::save(const char* text)
 {
-  int min = fileSize<strlen(text)?fileSize:strlen(text);
+  int min = (fileSize-1)<strlen(text)?fileSize:strlen(text);
   mifare_desfire_write_record(mTag, fileNumber, 0, min, (uint8_t *)text);
   mifare_desfire_commit_transaction(mTag);
 }
@@ -70,16 +70,18 @@ char* CRecordFile::read()
   fflush(stdout);
   */
 
-  buffer = (char *)malloc(sizeof(char) * fileInfo.settings.linear_record_file.record_size);
+  fileSize = fileInfo.settings.linear_record_file.record_size+1;
 
-  fileSize = fileInfo.settings.linear_record_file.record_size;
+  buffer = (char *)malloc(sizeof(char) * fileSize);
 
   if(!buffer)
-    return NULL;
+    return "Error malloc cyclic";
 
-  memset(buffer,0,fileSize+1);
+  memset(buffer,0,fileSize);
 
-  mifare_desfire_read_records (mTag, fileNumber, fileInfo.settings.linear_record_file.current_number_of_records, fileInfo.settings.linear_record_file.record_size, buffer);
+  mifare_desfire_read_records (mTag, fileNumber, 0, fileSize-1, buffer);
+
+  fflush(stdout);
 
   if(!buffer)
     return "Error reading cyclic record file";

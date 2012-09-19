@@ -133,8 +133,10 @@ void MainWindow::setLabelTxt(QListWidgetItem* item)
   info.append(temp.sprintf("\ncommunication_settings\n0x%02X",set.communication_settings));
   info.append(temp.sprintf("\naccess_rights\n0x%02X\n", set.access_rights));
 
+  /*
   printf("access rights: %04X\n",set.access_rights);
   fflush(stdout);
+  */
 
   switch(set.file_type)
   {
@@ -230,8 +232,10 @@ void MainWindow::fillApplicationList(QListWidgetItem* Item)
 
   uint8_t key_version;
   mifare_desfire_get_key_version(tag[lSelTag],0, &key_version);
+  /*
   printf("Key Version: %02X\n",key_version);
   fflush(stdout);
+  */
 
   //mifare_desfire_select_application (tag[lSelTag], NULL);
 
@@ -258,8 +262,8 @@ void MainWindow::fillFileList(QListWidgetItem* Item)
   mifare_desfire_get_file_ids(tag[lSelTag], &files, &file_count);
 
   if ( mifare_desfire_last_picc_error(tag[lSelTag]) == AUTHENTICATION_ERROR) {
-    printf("AUTHENTICATION_ERROR\n");
-    fflush(stdout);
+    // printf("AUTHENTICATION_ERROR\n");
+    // fflush(stdout);
     if ( mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey) < 0 ) {
       Key k(NULL,tag[lSelTag]);
       k.show();
@@ -752,16 +756,8 @@ void MainWindow::valueFileDecrease()
 
 void MainWindow::filePrint()
 {
-  struct mifare_desfire_file_settings set;
+  // current testing function
+  // no real printing function planned :-)
 
-  mifare_desfire_get_file_settings(tag[lSelTag], ui->fileList->currentItem()->text().toInt(NULL,16), &set);
-  printf("change access rights from 0x%4X\n",set.access_rights);
-  fflush(stdout);
 
-  mifare_desfire_change_file_settings(tag[lSelTag],ui->fileList->currentItem()->text().toInt(NULL,16),MDCM_PLAIN,0xeeee);
-  mifare_desfire_commit_transaction(tag[lSelTag]);
-
-  mifare_desfire_get_file_settings(tag[lSelTag], ui->fileList->currentItem()->text().toInt(NULL,16), &set);
-  printf("change access rights to 0x%4X\n",set.access_rights);
-  fflush(stdout);
 }

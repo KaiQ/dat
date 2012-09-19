@@ -45,7 +45,7 @@ int standartFile::createFile()
 
 int standartFile::save(const char* text)
 {
-  int min = fileInfo.settings.standard_file.file_size<strlen(text)?fileInfo.settings.standard_file.file_size:strlen(text);
+  int min = fileSize-1<strlen(text)?fileSize:strlen(text);
   return mifare_desfire_write_data(mTag,fileNumber,0,min,(uint8_t *)text);
 }
 

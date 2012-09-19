@@ -49,7 +49,8 @@ int BackupFile::createFile()
 int BackupFile::save(const char* text)
 {
   int min = fileInfo.settings.standard_file.file_size<strlen(text)?fileInfo.settings.standard_file.file_size:strlen(text);
-  return mifare_desfire_write_data(mTag,fileNumber,0,min,(uint8_t *)text);
+  mifare_desfire_write_data(mTag,fileNumber,0,min,(uint8_t *)text);
+  mifare_desfire_commit_transaction(mTag);
 }
 
 int BackupFile::setDockWidget()
