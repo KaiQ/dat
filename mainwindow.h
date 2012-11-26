@@ -84,12 +84,13 @@ private slots:
 
 private:
   Ui::MainWindow *ui;
-  nfc_device_desc_t devices[8];
-  nfc_device_t *device;
   MifareTag *tag;
   MifareDESFireAID *aids;
   uint8_t *files;
-  File *selectedFile;
+  nfc_connstring devices[8];
+  nfc_device *device;
+
+ File *selectedFile;
 
   long lSelTag;
   long lSelAid;

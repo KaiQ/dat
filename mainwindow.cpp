@@ -73,7 +73,7 @@ MainWindow::~MainWindow()
   if (tag)
     freefare_free_tags(tag);
   if (device)
-    nfc_disconnect(device);
+    nfc_close(device);
   delete ui;
 }
 
@@ -405,14 +405,12 @@ void MainWindow::deviceSelect() {
   bool temp;
   size_t device_count;
 
-  device_count = 0;
-
-  nfc_list_devices (devices, 8, &device_count);
+  device_count = nfc_list_devices (NULL,devices, 8);
 
   QStringList deviceList;
 
   if (device) {
-    nfc_disconnect(device);
+    nfc_close(device);
     device = NULL;
   }
 
@@ -421,9 +419,9 @@ void MainWindow::deviceSelect() {
   }
 
   for (unsigned int d = 0; d < device_count; d++) {
-    device = nfc_connect (&(devices[d]));
-    deviceList << device->acName;
-    nfc_disconnect(device);
+    device = nfc_open (NULL,devices[d]);
+    deviceList << nfc_device_get_name(device);
+    nfc_close(device);
   }
 
   QString choose = QInputDialog::getItem(this,"select Device","Devices:",deviceList,0,false,&temp);
@@ -433,7 +431,7 @@ void MainWindow::deviceSelect() {
 
   device = NULL;
 
-  device = nfc_connect (&(devices[deviceList.indexOf(choose)]));
+  device = nfc_open (NULL, devices[deviceList.indexOf(choose)]);
   if (!device) {
     ui->statusBar->showMessage(" Connecting to nfc device failed",5000);
     return;
