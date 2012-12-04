@@ -65,12 +65,11 @@ char* standartFile::read()
   fileSize = fileInfo.settings.standard_file.file_size+1;
 
   if(!buffer)
-    buffer = (char *)malloc(sizeof(char) * (fileSize));
+    buffer = (char*)calloc(fileSize,sizeof(char));
 
   if(!buffer)
     return "Error malloc";
 
-  memset(buffer,0,fileSize);
 
   if (mifare_desfire_read_data (mTag, this->fileNumber,0,fileSize-1,buffer) < 0)
   {

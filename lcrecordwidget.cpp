@@ -42,10 +42,10 @@ void LCRecordWidget::init() {
 
 void LCRecordWidget::setRecordSize(int i)
 {
-  max_number_of_records = i;
+  record_size = i;
 }
 
 void LCRecordWidget::setMaxNumberOfRecords(int i)
 {
-  record_size = i;
+  max_number_of_records = i;
 }

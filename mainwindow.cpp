@@ -162,6 +162,7 @@ void MainWindow::setLabelTxt(QListWidgetItem* item)
   // readFile();
   char* buffer = NULL;
 
+  mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey);
   buffer = selectedFile->read();
 
 
@@ -210,7 +211,8 @@ void MainWindow::fillApplicationList(QListWidgetItem* Item)
 
   mifare_desfire_connect (tag[lSelTag]);
 
-  if ( mifare_desfire_select_application (tag[lSelTag], NULL) == PERMISSION_ERROR ) {
+  if ( mifare_desfire_select_application (tag[lSelTag], NULL) == PERMISSION_ERROR ) 
+  {
     if ( mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey) < 0 ) {
       Key key(this,tag[lSelTag]);
       key.exec();
@@ -226,9 +228,11 @@ void MainWindow::fillApplicationList(QListWidgetItem* Item)
   QString temp;
 
   for (int i = 0; i < aid_count; i++ )
+  {
     ui->applicationList->addItem(temp.sprintf("%06X",mifare_desfire_aid_get_aid(aids[i])));
+  }
 
-  ui->applicationList->sortItems(Qt::AscendingOrder);
+  // ui->applicationList->sortItems(Qt::AscendingOrder);
 
   uint8_t key_version;
   mifare_desfire_get_key_version(tag[lSelTag],0, &key_version);
@@ -262,8 +266,8 @@ void MainWindow::fillFileList(QListWidgetItem* Item)
   mifare_desfire_get_file_ids(tag[lSelTag], &files, &file_count);
 
   if ( mifare_desfire_last_picc_error(tag[lSelTag]) == AUTHENTICATION_ERROR) {
-    // printf("AUTHENTICATION_ERROR\n");
-    // fflush(stdout);
+     printf("AUTHENTICATION_ERROR\n");
+     fflush(stdout);
     if ( mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey) < 0 ) {
       Key k(NULL,tag[lSelTag]);
       k.show();
@@ -281,10 +285,14 @@ void MainWindow::fillFileList(QListWidgetItem* Item)
 
   QString temp;
 
+  //printf("%06X\n",mifare_desfire_aid_get_aid(aids[lSelAid]));
   for(int i=0; i<file_count; i++)
+  {
     ui->fileList->addItem(temp.sprintf("%02x",files[i]));
+    //printf("  %02X\n",files[i]);
+  }
 
-  ui->fileList->sortItems(Qt::AscendingOrder);
+  // ui->fileList->sortItems(Qt::AscendingOrder);
   ui->menuApplication->setEnabled(true);
   ui->menuFile->setEnabled(false);
 
@@ -534,9 +542,15 @@ void MainWindow::freeMemory() {
 void MainWindow::formatPicc() {
 
   if ( mifare_desfire_format_picc(tag[lSelTag]) < 0 )
-    ui->statusBar->showMessage(QprintLastPiccError(),5000);
-  else
-    ui->statusBar->showMessage("Card sucessfully deleted",5000);
+  {
+    mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey);
+    if ( mifare_desfire_format_picc(tag[lSelTag]) < 0 )
+    {
+      ui->statusBar->showMessage("Format failure",5000);
+      return;
+    }    
+  }
+  ui->statusBar->showMessage("Card sucessfully deleted",5000);
 
 }
 
@@ -620,6 +634,7 @@ void MainWindow::applicationCreate() {
 
 void MainWindow::applicationDelete() {
   mifare_desfire_delete_application(tag[lSelTag], aids[lSelAid]);
+  // printf("aid: %X\n",lSelAid);
   ui->applicationList->clear();
   ui->fileList->clear();
   ui->menuApplication->setEnabled(false);
