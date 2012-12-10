@@ -55,7 +55,7 @@ void ValueWidget::setValLLimit(int i) {
 }
 
 void ValueWidget::init(int freeMem) {
-  ui->ValUpLim->setMaximum(freeMem);
+  //ui->ValUpLim->setMaximum(freeMem);
 }
 
 void ValueWidget::setValVal(int i)
