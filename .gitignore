@@ -15,3 +15,6 @@ dat
 *.lai
 *.la
 *.a
+
+# Makefile
+Makefile
