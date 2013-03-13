@@ -96,7 +96,6 @@ void MainWindow::setLabelTxt(QListWidgetItem* item)
     return;
 
   struct mifare_desfire_file_settings set;
-  QString info;
   QString temp;
 
   lSelFile = ui->fileList->currentRow();
@@ -110,19 +109,14 @@ void MainWindow::setLabelTxt(QListWidgetItem* item)
 
   if(set.file_type == MDFT_STANDARD_DATA_FILE){
     selectedFile = new standartFile(NULL,tag[lSelTag],ui->fileList->currentItem()->text().toInt(NULL,16));
-    info.append("STANDARD DATA FILE\n");
   }else if(set.file_type == MDFT_BACKUP_DATA_FILE){
     selectedFile = new BackupFile(NULL,tag[lSelTag],ui->fileList->currentItem()->text().toInt(NULL,16));
-    info.append("BACKUP FILE\n");
   }else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP){
     selectedFile = new ValueFile(NULL,tag[lSelTag],ui->fileList->currentItem()->text().toInt(NULL,16));
-    info.append("VALUE FILE\n");
   }else if(set.file_type == MDFT_LINEAR_RECORD_FILE_WITH_BACKUP){
     selectedFile = new LRecordFile(NULL,tag[lSelTag],ui->fileList->currentItem()->text().toInt(NULL,16));
-    info.append("LINEAR RECORD FILE\n");
   }else if(set.file_type == MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP){
     selectedFile = new CRecordFile(NULL,tag[lSelTag],ui->fileList->currentItem()->text().toInt(NULL,16));
-    info.append("CYCLIC RECORD FILE\n");
   }else
   {
     printf("Error get settings");
@@ -130,35 +124,10 @@ void MainWindow::setLabelTxt(QListWidgetItem* item)
     return;
   }
 
-  info.append(temp.sprintf("\ncommunication_settings\n0x%02X",set.communication_settings));
-  info.append(temp.sprintf("\naccess_rights\n0x%02X\n", set.access_rights));
-
   /*
   printf("access rights: %04X\n",set.access_rights);
   fflush(stdout);
   */
-
-  switch(set.file_type)
-  {
-    case MDFT_STANDARD_DATA_FILE:
-    case MDFT_BACKUP_DATA_FILE:
-      info.append(temp.sprintf("\n\nFile size: %d Byte", set.settings.standard_file.file_size));
-      break;
-    case MDFT_VALUE_FILE_WITH_BACKUP:
-      info.append(temp.sprintf("\nlower_limit %d", set.settings.value_file.lower_limit));
-      info.append(temp.sprintf("\nupper_limit %d", set.settings.value_file.upper_limit));
-      info.append(temp.sprintf("\nlimited_credit_value %d", set.settings.value_file.limited_credit_value));
-      info.append(temp.sprintf("\nlimited_credit_enabled %s", set.settings.value_file.limited_credit_enabled?"Yes":"No"));
-      break;
-    case MDFT_LINEAR_RECORD_FILE_WITH_BACKUP:
-    case MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP:
-      info.append(temp.sprintf("\nrecord_size %d\nmax_number_of_records %d\ncurrent_number_of_records %d",
-                               set.settings.linear_record_file.record_size,
-                               set.settings.linear_record_file.max_number_of_records,
-                               set.settings.linear_record_file.current_number_of_records));
-      break;
-  }
-
   // readFile();
   char* buffer = NULL;
 
@@ -182,7 +151,6 @@ void MainWindow::setLabelTxt(QListWidgetItem* item)
   else
     ui->textEdit->setText("Error File reading (NULL)");
 
-  ui->fileInfo->setText(info);
 
   delete(selectedFile);
 
@@ -307,14 +275,71 @@ void MainWindow::fillAfterFileList(QListWidgetItem* Item)
 
 
 void MainWindow::cardInfo() {
+  struct mifare_desfire_file_settings set;
+  QString info;
+  QString temp;
 
-  QString infos("UID:\t") ;
-  infos.append(freefare_get_tag_uid (tag[lSelTag]));
-  infos.append("\nATQA:\t");
-  infos.append("TODO");
-  infos.append("\nSAK:\t");
-  infos.append("TODO");
-  QMessageBox::information(this,"Card Info",infos,QMessageBox::Yes);
+  lSelFile = ui->fileList->currentRow();
+
+  memset(&set,0,sizeof(mifare_desfire_file_settings));
+
+
+  mifare_desfire_get_file_settings(tag[lSelTag], ui->fileList->currentItem()->text().toInt(NULL,16), &set);
+
+  info.append("UID:\t");
+  info.append(freefare_get_tag_uid (tag[lSelTag]));
+  info.append("\nATQA:\t");
+  info.append("TODO");
+  info.append("\nSAK:\t");
+  info.append("TODO\n\n");
+
+
+  if(set.file_type == MDFT_STANDARD_DATA_FILE){
+    info.append("STANDARD DATA FILE\n");
+  }else if(set.file_type == MDFT_BACKUP_DATA_FILE){
+    info.append("BACKUP FILE\n");
+  }else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP){
+    info.append("VALUE FILE\n");
+  }else if(set.file_type == MDFT_LINEAR_RECORD_FILE_WITH_BACKUP){
+    info.append("LINEAR RECORD FILE\n");
+  }else if(set.file_type == MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP){
+    info.append("CYCLIC RECORD FILE\n");
+  }else
+  {
+    printf("Error get settings");
+    fflush(stdout);
+    return;
+  }
+
+  info.append(temp.sprintf("\ncommunication_settings\n0x%02X",set.communication_settings));
+  info.append(temp.sprintf("\naccess_rights\n0x%02X\n", set.access_rights));
+
+
+  switch(set.file_type)
+  {
+    case MDFT_STANDARD_DATA_FILE:
+    case MDFT_BACKUP_DATA_FILE:
+      info.append(temp.sprintf("\n\nFile size: %d Byte", set.settings.standard_file.file_size));
+      break;
+    case MDFT_VALUE_FILE_WITH_BACKUP:
+      info.append(temp.sprintf("\nlower_limit %d", set.settings.value_file.lower_limit));
+      info.append(temp.sprintf("\nupper_limit %d", set.settings.value_file.upper_limit));
+      info.append(temp.sprintf("\nlimited_credit_value %d", set.settings.value_file.limited_credit_value));
+      info.append(temp.sprintf("\nlimited_credit_enabled %s", set.settings.value_file.limited_credit_enabled?"Yes":"No"));
+      break;
+    case MDFT_LINEAR_RECORD_FILE_WITH_BACKUP:
+    case MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP:
+      info.append(temp.sprintf("\nrecord_size %d\nmax_number_of_records %d\ncurrent_number_of_records %d",
+                               set.settings.linear_record_file.record_size,
+                               set.settings.linear_record_file.max_number_of_records,
+                               set.settings.linear_record_file.current_number_of_records));
+      break;
+  }
+
+
+
+
+  QMessageBox::information(this,"Card Info",info,QMessageBox::Yes);
 }
 
 void MainWindow::keySettingsInfo() {
@@ -412,8 +437,11 @@ void MainWindow::deviceScan() {
 void MainWindow::deviceSelect() {
   bool temp;
   size_t device_count;
+  nfc_context *context;
 
-  device_count = nfc_list_devices (NULL,devices, 8);
+  nfc_init(&context);
+
+  device_count = nfc_list_devices (context,devices, 8);
 
   QStringList deviceList;
 
@@ -427,7 +455,7 @@ void MainWindow::deviceSelect() {
   }
 
   for (unsigned int d = 0; d < device_count; d++) {
-    device = nfc_open (NULL,devices[d]);
+    device = nfc_open (context,devices[d]);
     deviceList << nfc_device_get_name(device);
     nfc_close(device);
   }
@@ -439,7 +467,7 @@ void MainWindow::deviceSelect() {
 
   device = NULL;
 
-  device = nfc_open (NULL, devices[deviceList.indexOf(choose)]);
+  device = nfc_open (context, devices[deviceList.indexOf(choose)]);
   if (!device) {
     ui->statusBar->showMessage(" Connecting to nfc device failed",5000);
     return;
