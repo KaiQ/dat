@@ -1,44 +1,31 @@
-# -------------------------------------------------
-# Project created by QtCreator 2011-02-28T12:39:14
-# -------------------------------------------------
+
+QT += core gui
+
 TARGET = dat
 TEMPLATE = app
-SOURCES += main.cpp \
-    mainwindow.cpp \
-    dialog.cpp \
-    key.cpp \
-    application.cpp \
-    file.cpp \
-    standartfile.cpp \
-    backupfile.cpp \
-    valuefile.cpp \
-    lrecordfile.cpp \
-    crecordfile.cpp \
-    stdbackupwidget.cpp \
-    valuewidget.cpp \
-    lcrecordwidget.cpp
-HEADERS += mainwindow.h \
-    dialog.h \
-    key.h \
-    application.h \
-    file.h \
-    standartfile.h \
-    backupfile.h \
-    valuefile.h \
-    lrecordfile.h \
-    crecordfile.h \
-    stdbackupwidget.h \
-    valuewidget.h \
-    lcrecordwidget.h
-FORMS += mainwindow.ui \
-    dialog.ui \
-    dialog.ui \
-    key.ui \
-    application.ui \
-    file.ui \
-    stdbackupwidget.ui \
-    valuewidget.ui \
-    lcrecordwidget.ui
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-unix:!macx:!symbian: LIBS += -lfreefare -lnfc
+SOURCES +=  main.cpp\
+mainwindow.cpp \
+desfire/application.cpp \
+desfire/card.cpp \
+desfire/key.cpp \
+desfire/defaultFile.cpp \
+desfire/item.cpp \
+model/desfire_model.cpp
+
+HEADERS  += mainwindow.h \
+desfire/application.h \
+desfire/card.h \
+desfire/key.h \
+desfire/defaultFile.h \
+desfire/item.h \
+model/desfire_model.h
+
+FORMS    += mainwindow.ui
+
+LIBS += -lnfc -lfreefare
+
+QMAKE_CXXFLAGS += -std=c++0x
+

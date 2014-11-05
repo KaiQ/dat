@@ -2,24 +2,33 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>420</width>
-    <height>432</height>
+    <height>433</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>420</width>
-    <height>432</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>420</width>
-    <height>432</height>
+    <height>433</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -40,8 +49,8 @@
    </property>
    <property name="maximumSize">
     <size>
-     <width>420</width>
-     <height>377</height>
+     <width>9999</width>
+     <height>9999</height>
     </size>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -144,16 +153,58 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QListWidget" name="cardList"/>
+         <widget class="QTreeView" name="cardList">
+          <property name="minimumSize">
+           <size>
+            <width>220</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
+          <property name="itemsExpandable">
+           <bool>false</bool>
+          </property>
+          <property name="expandsOnDoubleClick">
+           <bool>false</bool>
+          </property>
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="applicationList"/>
+         <widget class="QTreeView" name="applicationList">
+          <property name="minimumSize">
+           <size>
+            <width>220</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::DoubleClicked</set>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="fileList"/>
+         <widget class="QTreeView" name="fileList">
+          <property name="minimumSize">
+           <size>
+            <width>220</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QTextEdit" name="fileInfo">
+          <property name="minimumSize">
+           <size>
+            <width>220</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <pointsize>8</pointsize>
@@ -167,64 +218,11 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetMinimumSize</enum>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QToolButton" name="buttonSave">
-          <property name="text">
-           <string>Save</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="buttonDelete">
-          <property name="text">
-           <string>Delete</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="buttonPrintxD">
-          <property name="text">
-           <string>Print?</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="buttonIncrease">
-          <property name="text">
-           <string>increase</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="buttonDecrease">
-          <property name="text">
-           <string>decrease</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QTextEdit" name="textEdit">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>197</height>
-         </size>
-        </property>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <widget class="QWidget" name="page">
+         <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+        </widget>
+        <widget class="QWidget" name="page_2"/>
        </widget>
       </item>
       <item>
@@ -245,6 +243,22 @@
       </item>
      </layout>
     </item>
+    <item row="1" column="0">
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::MinimumExpanding</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
    </layout>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -262,7 +276,7 @@
      <x>0</x>
      <y>0</y>
      <width>420</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuProgram">
@@ -543,230 +557,6 @@
     <hint type="destinationlabel">
      <x>241</x>
      <y>199</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionDevice</sender>
-   <signal>triggered()</signal>
-   <receiver>textEdit</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>155</x>
-     <y>281</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionDevice</sender>
-   <signal>triggered()</signal>
-   <receiver>cardList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>50</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionDevice</sender>
-   <signal>triggered()</signal>
-   <receiver>applicationList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>155</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionDevice</sender>
-   <signal>triggered()</signal>
-   <receiver>fileList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>applicationList</sender>
-   <signal>itemClicked(QListWidgetItem*)</signal>
-   <receiver>fileList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>155</x>
-     <y>106</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cardList</sender>
-   <signal>itemClicked(QListWidgetItem*)</signal>
-   <receiver>applicationList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>50</x>
-     <y>106</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>155</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cardList</sender>
-   <signal>itemClicked(QListWidgetItem*)</signal>
-   <receiver>fileList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>50</x>
-     <y>106</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionScan</sender>
-   <signal>triggered()</signal>
-   <receiver>cardList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>50</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionScan</sender>
-   <signal>triggered()</signal>
-   <receiver>applicationList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>155</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionScan</sender>
-   <signal>triggered()</signal>
-   <receiver>fileList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>fileList</sender>
-   <signal>currentRowChanged(int)</signal>
-   <receiver>textEdit</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>260</x>
-     <y>106</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>155</x>
-     <y>281</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionAuthenticate</sender>
-   <signal>triggered()</signal>
-   <receiver>fileList</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>106</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cardList</sender>
-   <signal>itemClicked(QListWidgetItem*)</signal>
-   <receiver>fileInfo</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>59</x>
-     <y>139</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>359</x>
-     <y>139</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>applicationList</sender>
-   <signal>itemClicked(QListWidgetItem*)</signal>
-   <receiver>fileInfo</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>159</x>
-     <y>139</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>359</x>
-     <y>139</y>
     </hint>
    </hints>
   </connection>

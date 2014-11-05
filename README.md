@@ -1,12 +1,12 @@
-Desfire Access Tool (dat)
+Desfire Access Tool (dat v0.2)
 ===================
 
 Graphical tool to access Mifare Desfire cards.
 
-Uses: 
-- libnfc(1.6) 
-- libfreefare(0.3.4) 
-- Qt(4.x)
+Uses:
+- libnfc(1.7)
+- libfreefare
+- Qt5
 
 
 Creator: Kai Trott (kaitrott@gmail.com)
@@ -21,8 +21,6 @@ Still in progress...
 Background informations
 ==================
 
-- Student project
-- looking for colleagues who can spare some time :-)
-- Amount of active working persons: 1
-
+- student project
+- reimplemented in Model/View style
 
