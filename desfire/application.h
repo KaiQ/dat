@@ -1,17 +1,24 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "defaultFile.h"
-#include "key.h"
+#include <nfc/nfc.h>
+#include <freefare.h>
+#include <QString>
+#include "item.h"
+#include "card.h"
 
-class Application
+class Application : public Item
 {
 public:
-  Application();
+  Application(MifareDESFireAID aid, Item* parent = 0);
+  ~Application();
+  QVariant data(int role) const;
+  int select();
+  void deselect();
 
 private:
-  DefaultFile files[32];
-  Key keys[14];
+  MifareDESFireAID aid;
+  QString name;
 
 };
 

@@ -22,15 +22,12 @@ public:
 
 private:
   Ui::MainWindow *ui;
-  nfc_connstring m_devices[8];
-  nfc_context *m_context;
-  nfc_device *m_device;
+  nfc_context *context;
   DesfireModel* model;
 
 private slots:
   void deviceSelect();
   void deviceScan();
-  void cardSelect(const QModelIndex & index);
 };
 
 #endif // MAINWINDOW_H

@@ -4,6 +4,7 @@
 #include <QAbstractTableModel>
 #include <QVector>
 #include "desfire/card.h"
+#include "desfire/device.h"
 
 
 class DesfireModel : public QAbstractItemModel
@@ -20,6 +21,11 @@ class DesfireModel : public QAbstractItemModel
     QModelIndex parent(const QModelIndex &) const;
 
     int addCard(Card *card);
+    bool setDevice(nfc_device *device);
+    void scanDevice();
+
+  public slots:
+    void select(const QModelIndex & index);
 
   private:
     Item *rootItem;

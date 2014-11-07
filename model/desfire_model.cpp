@@ -4,13 +4,13 @@
 DesfireModel::DesfireModel(QObject *parent)
   :QAbstractItemModel(parent)
 {
-  rootItem = new Item();
+  rootItem = new Device();
 }
 
 
 DesfireModel::~DesfireModel()
 {
-  delete rootItem;
+  delete this->rootItem;
 }
 
 
@@ -88,4 +88,42 @@ QModelIndex DesfireModel::parent(const QModelIndex &index) const
     return QModelIndex();
 
   return createIndex(parent->row(), 0, parent);
+}
+
+
+void DesfireModel::select(const QModelIndex & index)
+{
+  if (!index.isValid())
+  {
+    printf("hier");
+    fflush(stdout);
+    return;
+  }
+
+  Item *item = static_cast<Item*>(index.internalPointer());
+  if (item->select() < 0)
+  {
+    //TODO ERROR MESSAGE CODE
+    return;
+  }
+}
+
+
+bool DesfireModel::setDevice(nfc_device *device)
+{
+  delete this->rootItem;
+
+  this->rootItem = new Device(device);
+}
+
+
+void DesfireModel::scanDevice()
+{
+  beginInsertRows(QModelIndex(),
+      this->rootItem->childCount(),
+      this->rootItem->childCount());
+  this->rootItem->select();
+  endInsertRows();
+  printf("-> %d\n", this->rootItem->childCount());
+  fflush(stdout);
 }

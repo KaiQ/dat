@@ -6,14 +6,15 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-  nfc_init(&this->m_context);
-  connect(ui->actionDevice, SIGNAL(triggered()), this, SLOT(deviceSelect()));
-  connect(ui->cardList, SIGNAL(doubleClicked()), this, SLOT(cardSelect()));
+  nfc_init(&this->context);
 
   this->model = new DesfireModel(this);
   this->ui->cardList->setModel(this->model);
+  this->ui->applicationList->setModel(this->model);
 
-  this->m_device = NULL;
+  connect(this->ui->actionDevice, SIGNAL(triggered()), this, SLOT(deviceSelect()));
+  connect(this->ui->cardList, SIGNAL(doubleClicked(const QModelIndex&)), this->model, SLOT(select(const QModelIndex&)));
+  connect(this->ui->cardList, SIGNAL(doubleClicked(const QModelIndex&)), this->ui->applicationList, SLOT(setRootIndex(const QModelIndex&)));
 }
 
 MainWindow::~MainWindow()
@@ -30,8 +31,9 @@ void MainWindow::deviceSelect()
   nfc_device *device;
   nfc_connstring devices[8];
 
-  device_count = nfc_list_devices (m_context,devices, 8);
+  device_count = nfc_list_devices (this->context,devices, 8);
 
+  /*
   if (this->m_device)
   {
     if (QMessageBox::question(this, "Realy?", "Do You realy want to change the Device?",
@@ -43,10 +45,11 @@ void MainWindow::deviceSelect()
     else
       return;
   }
+  */
 
   for (unsigned int d = 0; d < device_count; d++)
   {
-    device = nfc_open (m_context,devices[d]);
+    device = nfc_open (this->context,devices[d]);
     deviceList << nfc_device_get_name(device);
     nfc_close(device);
     device = NULL;
@@ -60,11 +63,13 @@ void MainWindow::deviceSelect()
   }
   // TODO close und modell aktualisieren
 
-  this->m_device = nfc_open (m_context, devices[deviceList.indexOf(choose)]);
-  if (!this->m_device) {
+  nfc_device *selectedDevice = nfc_open (this->context, devices[deviceList.indexOf(choose)]);
+  if (!selectedDevice) {
     ui->statusBar->showMessage(" Connecting to nfc device failed",5000);
     return;
   }
+
+  this->model->setDevice(selectedDevice);
 
   deviceScan();
 }
@@ -72,30 +77,7 @@ void MainWindow::deviceSelect()
 
 void MainWindow::deviceScan()
 {
-  if (!this->m_device)
-  {
-    ui->statusBar->showMessage("No Device Selected",5000);
-    return;
-  }
-
-  MifareTag *tag = freefare_get_tags(this->m_device);
-  if (!tag)
-  {
-    ui->statusBar->showMessage("Error listing tags",5000);
-    return;
-  }
-
-  for (int i = 0; tag[i]; i++)
-  {
-    Card *newCard = new Card(freefare_get_tag_friendly_name(tag[i]),
-         freefare_get_tag_uid(tag[i]));
-    this->model->addCard(newCard);
-  }
+  this->model->scanDevice();
 }
 
 
-void MainWindow::cardSelect(const QModelIndex & index)
-{
-  printf("hier");
-  fflush(stdout);
-}

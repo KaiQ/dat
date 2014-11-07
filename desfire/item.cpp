@@ -58,3 +58,4 @@ void Item::setParent(Item *parent)
 {
   this->parentItem = parent;
 }
+

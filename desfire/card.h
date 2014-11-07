@@ -4,21 +4,25 @@
 #include <nfc/nfc.h>
 #include <freefare.h>
 #include <QString>
-#include <QVector>
-#include "application.h"
 #include "item.h"
+#include "device.h"
+#include "application.h"
 
 
 class Card : public Item
 {
 public:
-  Card(QString, QString);
+  Card(MifareTag tag, Item* parent = 0);
+  ~Card();
   QVariant data(int role) const;
-  bool select();
+  int select();
+  void deselect();
 
 private:
   QString uid;
   QString type;
+  MifareTag tag;
+  MifareDESFireAID *aids;
 };
 
 #endif // CARD_H
