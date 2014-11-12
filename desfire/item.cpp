@@ -4,12 +4,7 @@
 Item::Item(Item* parent)
 {
   this->parentItem = parent;
-}
-
-
-Item::~Item()
-{
-  qDeleteAll(this->children);
+  this->active = false;
 }
 
 
@@ -48,14 +43,49 @@ void Item::addChild(Item *child)
 }
 
 
-QVariant Item::data(int role) const
-{
-  return "ROOT";
-}
-
-
 void Item::setParent(Item *parent)
 {
   this->parentItem = parent;
 }
+
+
+int Item::select()
+{
+  qDebug("setting active");
+  this->active = true;
+  return 0;
+}
+
+
+void Item::deselect()
+{
+  qDebug("deselect Item ~.~");
+  this->active = false;
+}
+
+
+bool Item::isActive()
+{
+  return this->active;
+}
+
+
+void Item::setActive(bool value)
+{
+  this->active = value;
+}
+
+
+Item* Item::getActiveChild()
+{
+  for (int i = 0; i < this->children.count(); i++)
+  {
+    if (children[i]->isActive())
+      return children[i];
+  }
+
+  return NULL;
+}
+
+
 

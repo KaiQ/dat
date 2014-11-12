@@ -17,6 +17,7 @@ public:
   QVariant data(int role) const;
   int select();
   void deselect();
+  MifareTag getTag();
 
 private:
   QString uid;

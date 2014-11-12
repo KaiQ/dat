@@ -5,12 +5,19 @@ Device::Device(nfc_device *_device, Item* parent) :
   Item(parent),
   device(_device)
 {
+  this->setActive(true);
 }
 
 
 Device::~Device()
 {
-  this->deselect();
+  qDebug("Destructor Device");
+  qDeleteAll(this->children);
+  if (this->isActive())
+  {
+    qDebug("found active");
+    this->deselect();
+  }
 }
 
 
@@ -38,11 +45,19 @@ int Device::select()
     Card *newCard = new Card(tags[i], this);
     this->addChild(newCard);
   }
+
+  return this->childCount();
 }
 
 
 void Device::deselect()
 {
+  qDebug("deselect Device :-)");
+  if (this->device)
+  {
+    qDebug("close Device");
+    nfc_close(this->device);
+  }
 }
 
 

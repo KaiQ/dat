@@ -19,7 +19,6 @@ public:
 private:
   MifareDESFireAID aid;
   QString name;
-
 };
 
 #endif // APPLICATION_H

@@ -11,15 +11,27 @@ MainWindow::MainWindow(QWidget *parent) :
   this->model = new DesfireModel(this);
   this->ui->cardList->setModel(this->model);
   this->ui->applicationList->setModel(this->model);
+  this->ui->fileList->setModel(this->model);
 
-  connect(this->ui->actionDevice, SIGNAL(triggered()), this, SLOT(deviceSelect()));
-  connect(this->ui->cardList, SIGNAL(doubleClicked(const QModelIndex&)), this->model, SLOT(select(const QModelIndex&)));
-  connect(this->ui->cardList, SIGNAL(doubleClicked(const QModelIndex&)), this->ui->applicationList, SLOT(setRootIndex(const QModelIndex&)));
+  connect(this->ui->actionDevice,
+      SIGNAL(triggered()),
+      this,
+      SLOT(deviceSelect()));
+  connect(this->ui->cardList,
+      SIGNAL(doubleClicked(const QModelIndex&)),
+      this->model,
+      SLOT(select(const QModelIndex&)));
+  connect(this->ui->applicationList,
+      SIGNAL(doubleClicked(const QModelIndex&)),
+      this->model,
+      SLOT(select(const QModelIndex&)));
 }
+
 
 MainWindow::~MainWindow()
 {
   delete ui;
+  delete this->model;
 }
 
 
@@ -64,7 +76,8 @@ void MainWindow::deviceSelect()
   // TODO close und modell aktualisieren
 
   nfc_device *selectedDevice = nfc_open (this->context, devices[deviceList.indexOf(choose)]);
-  if (!selectedDevice) {
+  if (!selectedDevice)
+  {
     ui->statusBar->showMessage(" Connecting to nfc device failed",5000);
     return;
   }

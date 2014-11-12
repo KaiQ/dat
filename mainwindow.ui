@@ -191,6 +191,9 @@
           <property name="itemsExpandable">
            <bool>false</bool>
           </property>
+          <property name="expandsOnDoubleClick">
+           <bool>false</bool>
+          </property>
           <attribute name="headerVisible">
            <bool>false</bool>
           </attribute>
@@ -204,6 +207,18 @@
             <height>0</height>
            </size>
           </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
+          <property name="itemsExpandable">
+           <bool>false</bool>
+          </property>
+          <property name="expandsOnDoubleClick">
+           <bool>false</bool>
+          </property>
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
          </widget>
         </item>
         <item>
@@ -566,6 +581,38 @@
     <hint type="destinationlabel">
      <x>241</x>
      <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cardList</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>applicationList</receiver>
+   <slot>setRootIndex(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>217</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>220</x>
+     <y>217</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>applicationList</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>fileList</receiver>
+   <slot>setRootIndex(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>217</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>320</x>
+     <y>217</y>
     </hint>
    </hints>
   </connection>

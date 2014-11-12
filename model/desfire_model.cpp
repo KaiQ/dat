@@ -44,17 +44,6 @@ QVariant DesfireModel::data(const QModelIndex &index, int role) const
 }
 
 
-int DesfireModel::addCard(Card *card)
-{
-  beginInsertRows(QModelIndex(),
-      this->rootItem->childCount(),
-      this->rootItem->childCount());
-  this->rootItem->addChild(dynamic_cast<Item*>(card));
-  endInsertRows();
-  return this->rootItem->childCount();
-}
-
-
 QModelIndex DesfireModel::index(int row, int column, const QModelIndex &parent) const
 {
   if (!hasIndex(row, column, parent))
@@ -95,22 +84,42 @@ void DesfireModel::select(const QModelIndex & index)
 {
   if (!index.isValid())
   {
-    printf("hier");
-    fflush(stdout);
+    qDebug("selected an invalid index? o.0");
     return;
   }
 
   Item *item = static_cast<Item*>(index.internalPointer());
-  if (item->select() < 0)
+  Item *parent = item->parent();
+  Item *active = parent->getActiveChild();
+
+  if (active == item)
   {
+    qDebug("activating an active Item");
+    return;
+  }
+
+  if (active)
+  {
+    active->deselect();
+  }
+
+  int from = item->childCount();
+  if (item->select() >= 0)
+  {
+    //TODO necessary?
+    beginInsertRows(index,
+        from,
+        item->childCount());
+    endInsertRows();
     //TODO ERROR MESSAGE CODE
     return;
   }
 }
 
 
-bool DesfireModel::setDevice(nfc_device *device)
+void DesfireModel::setDevice(nfc_device *device)
 {
+  //TODO signal about remove
   delete this->rootItem;
 
   this->rootItem = new Device(device);
@@ -119,11 +128,11 @@ bool DesfireModel::setDevice(nfc_device *device)
 
 void DesfireModel::scanDevice()
 {
-  beginInsertRows(QModelIndex(),
-      this->rootItem->childCount(),
-      this->rootItem->childCount());
+  int from = this->rootItem->childCount();
   this->rootItem->select();
+  beginInsertRows(QModelIndex(),
+      from,
+      this->rootItem->childCount());
   endInsertRows();
-  printf("-> %d\n", this->rootItem->childCount());
   fflush(stdout);
 }

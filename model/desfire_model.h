@@ -20,8 +20,7 @@ class DesfireModel : public QAbstractItemModel
         const QModelIndex &parent = QModelIndex()) const;
     QModelIndex parent(const QModelIndex &) const;
 
-    int addCard(Card *card);
-    bool setDevice(nfc_device *device);
+    void setDevice(nfc_device *device);
     void scanDevice();
 
   public slots:

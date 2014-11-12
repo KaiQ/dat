@@ -9,7 +9,7 @@ class Item
 {
   public:
     Item(Item* parent = 0);
-    ~Item();
+    virtual ~Item() = 0;
     virtual QVariant data(int role) const = 0;
     virtual int select() = 0;
     virtual void deselect() = 0;
@@ -19,10 +19,16 @@ class Item
     int row() const;
     void addChild(Item *child);
     void setParent(Item *parent);
+    bool isActive();
+    void setActive(bool value = false);
+    Item* getActiveChild();
+
+  protected:
+    QVector<Item*> children;
 
   private:
-    QVector<Item*> children;
     Item *parentItem;
+    bool active;
 };
 
 

@@ -1,3 +1,1 @@
-connect(myTreeView, SIGNAL(activated(QModelIndex)),
-  myListView, SLOT(setRootIndex(QModelIndex)));
-
+Files

@@ -12,7 +12,14 @@ Card::Card(MifareTag _tag, Item* parent) :
 
 Card::~Card()
 {
-  //TODO
+  qDebug("Destructor Card");
+  qDeleteAll(this->children);
+
+  if (this->isActive())
+  {
+    qDebug("found active");
+    this->deselect();
+  }
 }
 
 
@@ -31,23 +38,35 @@ QVariant Card::data(int role) const
 
 int Card::select()
 {
+  qDebug("select Card");
   size_t aid_count = 0;
 
   mifare_desfire_connect(this->tag);
 
   mifare_desfire_get_application_ids (this->tag, &this->aids, &aid_count);
 
-  printf("found %d aids\n", aid_count);
+  printf("found %ld aids\n", aid_count);
   fflush(stdout);
 
-  for (int i = 0; i < aid_count; i++ )
+  for (unsigned int i = 0; i < aid_count; i++ )
   {
     Application *newApplication = new Application(this->aids[i], this);
     this->addChild(newApplication);
   }
+
+  return 0;
 }
 
 
 void Card::deselect()
 {
+  qDebug("deselect Card");
+  if (this->tag)
+    mifare_desfire_disconnect(this->tag);
+}
+
+
+MifareTag Card::getTag()
+{
+  return this->tag;
 }

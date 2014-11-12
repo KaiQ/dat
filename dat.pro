@@ -13,7 +13,9 @@ desfire/card.cpp \
 desfire/key.cpp \
 desfire/defaultFile.cpp \
 desfire/item.cpp \
+desfire/file.cpp \
 desfire/device.cpp \
+desfire/files/std.cpp \
 model/desfire_model.cpp
 
 HEADERS  += mainwindow.h \
@@ -22,7 +24,9 @@ desfire/card.h \
 desfire/key.h \
 desfire/defaultFile.h \
 desfire/item.h \
+desfire/file.h \
 desfire/device.h \
+desfire/files/std.h \
 model/desfire_model.h
 
 FORMS    += mainwindow.ui

@@ -11,7 +11,13 @@ Application::Application(MifareDESFireAID _aid, Item* parent) :
 
 Application::~Application()
 {
-  //TODO
+  qDebug("Destructor Application");
+  qDeleteAll(this->children);
+  if (this->isActive())
+  {
+    qDebug("found active");
+    this->deselect();
+  }
 }
 
 
@@ -29,9 +35,60 @@ QVariant Application::data(int role) const
 
 int Application::select()
 {
+  qDebug("select Application");
+  uint8_t *files;
+  size_t file_count = 0;
+  size_t aid_count = 0;
+
+  Card *card = dynamic_cast<Card *>(this->parent());
+
+  mifare_desfire_select_application (card->getTag(), this->aid);
+
+  mifare_desfire_get_file_ids(card->getTag(), &files, &file_count);
+
+  /*
+  if ( mifare_desfire_last_picc_error(tag[lSelTag]) == AUTHENTICATION_ERROR) {
+     printf("AUTHENTICATION_ERROR\n");
+     fflush(stdout);
+    if ( mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey) < 0 ) {
+      Key k(NULL,tag[lSelTag]);
+      k.show();
+      k.exec();
+      k.Auth();
+    }
+    mifare_desfire_get_file_ids(tag[lSelTag], &files, &file_count);
+  }
+  */
+
+  struct mifare_desfire_file_settings set;
+  memset(&set,0,sizeof(mifare_desfire_file_settings));
+
+  for(int i=0; i<file_count; i++)
+  {
+    mifare_desfire_get_file_settings(card->getTag(), files[i], &set);
+    if(set.file_type == MDFT_STANDARD_DATA_FILE){
+      printf("STANDARD DATA FILE\n");
+    }else if(set.file_type == MDFT_BACKUP_DATA_FILE){
+      printf("BACKUP FILE\n");
+    }else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP){
+      printf("VALUE FILE\n");
+    }else if(set.file_type == MDFT_LINEAR_RECORD_FILE_WITH_BACKUP){
+      printf("LINEAR RECORD FILE\n");
+    }else if(set.file_type == MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP){
+      printf("CYCLIC RECORD FILE\n");
+    }else
+    {
+      printf("Error get settings");
+    }
+    printf("  %02X\n",files[i]);
+    fflush(stdout);
+  }
+
+  return 0;
 }
 
 
 void Application::deselect()
 {
+  qDebug("deselect Application");
 }
