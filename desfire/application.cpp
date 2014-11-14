@@ -47,18 +47,18 @@ int Application::select()
   mifare_desfire_get_file_ids(card->getTag(), &files, &file_count);
 
   /*
-  if ( mifare_desfire_last_picc_error(tag[lSelTag]) == AUTHENTICATION_ERROR) {
+     if ( mifare_desfire_last_picc_error(tag[lSelTag]) == AUTHENTICATION_ERROR) {
      printf("AUTHENTICATION_ERROR\n");
      fflush(stdout);
-    if ( mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey) < 0 ) {
-      Key k(NULL,tag[lSelTag]);
-      k.show();
-      k.exec();
-      k.Auth();
-    }
-    mifare_desfire_get_file_ids(tag[lSelTag], &files, &file_count);
-  }
-  */
+     if ( mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey) < 0 ) {
+     Key k(NULL,tag[lSelTag]);
+     k.show();
+     k.exec();
+     k.Auth();
+     }
+     mifare_desfire_get_file_ids(tag[lSelTag], &files, &file_count);
+     }
+     */
 
   struct mifare_desfire_file_settings set;
   memset(&set,0,sizeof(mifare_desfire_file_settings));
@@ -66,24 +66,33 @@ int Application::select()
   for(int i=0; i<file_count; i++)
   {
     mifare_desfire_get_file_settings(card->getTag(), files[i], &set);
-    if(set.file_type == MDFT_STANDARD_DATA_FILE){
-      printf("STANDARD DATA FILE\n");
-    }else if(set.file_type == MDFT_BACKUP_DATA_FILE){
-      printf("BACKUP FILE\n");
-    }else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP){
-      printf("VALUE FILE\n");
-    }else if(set.file_type == MDFT_LINEAR_RECORD_FILE_WITH_BACKUP){
-      printf("LINEAR RECORD FILE\n");
-    }else if(set.file_type == MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP){
-      printf("CYCLIC RECORD FILE\n");
-    }else
+    if(set.file_type == MDFT_STANDARD_DATA_FILE)
+    {
+      StdFile *file = new StdFile(i, set, this);
+      this->addChild(file);
+    } else if(set.file_type == MDFT_BACKUP_DATA_FILE)
+    {
+      BackupFile *file = new BackupFile(i, set, this);
+      this->addChild(file);
+    } else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP)
+    {
+      ValueFile *file = new ValueFile(i, set, this);
+      this->addChild(file);
+    } else if(set.file_type == MDFT_LINEAR_RECORD_FILE_WITH_BACKUP)
+    {
+      LRecordFile *file = new LRecordFile(i, set, this);
+      this->addChild(file);
+    } else if(set.file_type == MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP)
+    {
+      CRecordFile *file = new CRecordFile(i, set, this);
+      this->addChild(file);
+    } else
     {
       printf("Error get settings");
     }
-    printf("  %02X\n",files[i]);
-    fflush(stdout);
   }
 
+  this->active = true;
   return 0;
 }
 
@@ -91,4 +100,6 @@ int Application::select()
 void Application::deselect()
 {
   qDebug("deselect Application");
+  //qDeleteAll(this->children);
+  this->children.clear();
 }

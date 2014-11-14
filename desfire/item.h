@@ -25,10 +25,10 @@ class Item
 
   protected:
     QVector<Item*> children;
+    bool active;
 
   private:
     Item *parentItem;
-    bool active;
 };
 
 

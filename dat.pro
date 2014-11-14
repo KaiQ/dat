@@ -15,7 +15,11 @@ desfire/defaultFile.cpp \
 desfire/item.cpp \
 desfire/file.cpp \
 desfire/device.cpp \
-desfire/files/std.cpp \
+desfire/files/stdFile.cpp \
+desfire/files/backupFile.cpp \
+desfire/files/valueFile.cpp \
+desfire/files/cRecordFile.cpp \
+desfire/files/lRecordFile.cpp \
 model/desfire_model.cpp
 
 HEADERS  += mainwindow.h \
@@ -26,7 +30,11 @@ desfire/defaultFile.h \
 desfire/item.h \
 desfire/file.h \
 desfire/device.h \
-desfire/files/std.h \
+desfire/files/stdFile.h \
+desfire/files/backupFile.h \
+desfire/files/valueFile.h \
+desfire/files/cRecordFile.h \
+desfire/files/lRecordFile.h \
 model/desfire_model.h
 
 FORMS    += mainwindow.ui

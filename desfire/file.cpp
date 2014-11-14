@@ -18,6 +18,7 @@ File::~File()
 
 int File::select()
 {
+  this->active = true;
   return 0;
 }
 

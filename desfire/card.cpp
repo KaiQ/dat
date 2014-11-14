@@ -54,6 +54,7 @@ int Card::select()
     this->addChild(newApplication);
   }
 
+  this->active = true;
   return 0;
 }
 
@@ -61,6 +62,8 @@ int Card::select()
 void Card::deselect()
 {
   qDebug("deselect Card");
+  qDeleteAll(this->children);
+
   if (this->tag)
     mifare_desfire_disconnect(this->tag);
 }

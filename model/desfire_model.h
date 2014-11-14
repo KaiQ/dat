@@ -3,6 +3,7 @@
 
 #include <QAbstractTableModel>
 #include <QVector>
+#include <QColor>
 #include "desfire/card.h"
 #include "desfire/device.h"
 

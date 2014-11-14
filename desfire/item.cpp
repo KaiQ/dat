@@ -8,6 +8,12 @@ Item::Item(Item* parent)
 }
 
 
+Item::~Item()
+{
+  qDebug("Destructor Item");
+}
+
+
 Item* Item::child(int row)
 {
   return this->children[row];
@@ -32,6 +38,7 @@ int Item::row() const
   {
     return this->parentItem->children.indexOf(const_cast<Item*>(this));
   }
+
   return 0;
 }
 

@@ -40,6 +40,13 @@ QVariant DesfireModel::data(const QModelIndex &index, int role) const
 
   Item *item = static_cast<Item*>(index.internalPointer());
 
+  if ( role == Qt::BackgroundRole )
+    if ( item->isActive() )
+    {
+      qDebug("return green");
+      return QColor(Qt::green);
+    }
+
   return item->data(role);
 }
 
@@ -100,7 +107,14 @@ void DesfireModel::select(const QModelIndex & index)
 
   if (active)
   {
+    int to = item->childCount();
     active->deselect();
+    qDebug("deselecting active Item first");
+    beginRemoveRows(index,
+        0,
+        to);
+    endInsertRows();
+    this->dataChanged(index, index);
   }
 
   int from = item->childCount();
@@ -111,6 +125,7 @@ void DesfireModel::select(const QModelIndex & index)
         from,
         item->childCount());
     endInsertRows();
+    this->dataChanged(index, index);
     //TODO ERROR MESSAGE CODE
     return;
   }

@@ -46,6 +46,7 @@ int Device::select()
     this->addChild(newCard);
   }
 
+  this->active = true;
   return this->childCount();
 }
 
