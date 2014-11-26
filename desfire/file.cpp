@@ -25,4 +25,5 @@ int File::select()
 
 void File::deselect()
 {
+  this->active = false;
 }

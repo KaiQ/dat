@@ -12,7 +12,7 @@ class File : public Item
   public:
     File(uint8_t filenumber, mifare_desfire_file_settings settings, Item* parent = 0);
     ~File();
-    int select();
+    virtual int select();
     void deselect();
 
   protected:
