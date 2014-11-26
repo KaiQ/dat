@@ -13,7 +13,6 @@ Card::Card(MifareTag _tag, Item* parent) :
 Card::~Card()
 {
   qDebug("Destructor Card");
-  qDeleteAll(this->children);
 
   if (this->isActive())
   {
@@ -63,9 +62,12 @@ void Card::deselect()
 {
   qDebug("deselect Card");
   qDeleteAll(this->children);
+  this->children.clear();
 
   if (this->tag)
     mifare_desfire_disconnect(this->tag);
+
+  this->active = false;
 }
 
 

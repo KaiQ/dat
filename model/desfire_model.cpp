@@ -107,25 +107,32 @@ void DesfireModel::select(const QModelIndex & index)
 
   if (active)
   {
+    qDebug("deselecting active Item first");
     int to = item->childCount();
     active->deselect();
-    qDebug("deselecting active Item first");
+    qDebug("deselecting active Item done");
+    /* // brings bugs xD
     beginRemoveRows(index,
         0,
         to);
     endInsertRows();
-    this->dataChanged(index, index);
+    */
+    QModelIndex oldActiveIndex = this->index(active->row(), index.column(), index.parent());
+    this->dataChanged(oldActiveIndex, oldActiveIndex);
   }
 
+  qDebug("selecting next active item");
   int from = item->childCount();
   if (item->select() >= 0)
   {
+    qDebug("selecting next active item done");
     //TODO necessary?
     beginInsertRows(index,
         from,
         item->childCount());
     endInsertRows();
     this->dataChanged(index, index);
+    qDebug("events about rows inserted");
     //TODO ERROR MESSAGE CODE
     return;
   }

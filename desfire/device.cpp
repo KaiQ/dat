@@ -12,7 +12,7 @@ Device::Device(nfc_device *_device, Item* parent) :
 Device::~Device()
 {
   qDebug("Destructor Device");
-  qDeleteAll(this->children);
+
   if (this->isActive())
   {
     qDebug("found active");
@@ -54,13 +54,17 @@ int Device::select()
 void Device::deselect()
 {
   qDebug("deselect Device :-)");
+  qDeleteAll(this->children);
+  this->children.clear();
+
   if (this->device)
   {
     qDebug("close Device");
     nfc_close(this->device);
   }
-}
 
+  this->active = false;
+}
 
 
 nfc_device* Device::getDevice()

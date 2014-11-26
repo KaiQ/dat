@@ -10,8 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
   this->model = new DesfireModel(this);
   this->ui->cardList->setModel(this->model);
+  this->ui->cardList->setRootIndex(QModelIndex());
   this->ui->applicationList->setModel(this->model);
   this->ui->fileList->setModel(this->model);
+  this->ui->fileList->setRootIndex(QModelIndex());
 
   connect(this->ui->actionDevice,
       SIGNAL(triggered()),

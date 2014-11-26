@@ -12,7 +12,7 @@ Application::Application(MifareDESFireAID _aid, Item* parent) :
 Application::~Application()
 {
   qDebug("Destructor Application");
-  qDeleteAll(this->children);
+
   if (this->isActive())
   {
     qDebug("found active");
@@ -88,7 +88,7 @@ int Application::select()
       this->addChild(file);
     } else
     {
-      printf("Error get settings");
+      qDebug("Error get File settings");
     }
   }
 
@@ -100,6 +100,8 @@ int Application::select()
 void Application::deselect()
 {
   qDebug("deselect Application");
-  //qDeleteAll(this->children);
+  qDeleteAll(this->children);
   this->children.clear();
+  this->active = false;
 }
+
