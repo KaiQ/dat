@@ -11,9 +11,8 @@ mainwindow.cpp \
 desfire/application.cpp \
 desfire/card.cpp \
 desfire/key.cpp \
-desfire/defaultFile.cpp \
 desfire/item.cpp \
-desfire/file.cpp \
+desfire/desfireFile.cpp \
 desfire/device.cpp \
 desfire/files/stdFile.cpp \
 desfire/files/backupFile.cpp \
@@ -26,9 +25,8 @@ HEADERS  += mainwindow.h \
 desfire/application.h \
 desfire/card.h \
 desfire/key.h \
-desfire/defaultFile.h \
 desfire/item.h \
-desfire/file.h \
+desfire/desfireFile.h \
 desfire/device.h \
 desfire/files/stdFile.h \
 desfire/files/backupFile.h \
@@ -37,7 +35,8 @@ desfire/files/cRecordFile.h \
 desfire/files/lRecordFile.h \
 model/desfire_model.h
 
-FORMS    += mainwindow.ui
+FORMS    += GUI/mainwindow.ui \
+GUI/stdFile.ui
 
 LIBS += -lnfc -lfreefare
 

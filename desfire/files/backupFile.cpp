@@ -2,7 +2,7 @@
 
 
 BackupFile::BackupFile(uint8_t filenumber, mifare_desfire_file_settings settings, Item* parent) :
-  File(filenumber, settings, parent)
+  DesfireFile(filenumber, settings, parent)
 {
 }
 

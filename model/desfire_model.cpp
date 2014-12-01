@@ -158,3 +158,35 @@ void DesfireModel::scanDevice()
   endInsertRows();
   fflush(stdout);
 }
+
+
+Card* DesfireModel::getActiveCard()
+{
+  if (this->rootItem)
+    return dynamic_cast<Card*>(this->rootItem->getActiveChild());
+
+  return NULL;
+}
+
+
+
+Application* DesfireModel::getActiveApplication()
+{
+  Card* c = getActiveCard();
+
+  if (c)
+    return dynamic_cast<Application*>(c->getActiveChild());
+
+  return NULL;
+}
+
+
+DesfireFile* DesfireModel::getActiveFile()
+{
+  Application* a = getActiveApplication();
+
+  if (a)
+    return dynamic_cast<DesfireFile*>(a->getActiveChild());
+
+  return NULL;
+}

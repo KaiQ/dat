@@ -100,3 +100,23 @@ void MainWindow::deviceScan()
 }
 
 
+void MainWindow::showCardInfo()
+{
+  if (!this->model)
+    return;
+
+  Card* c = this->model->getActiveCard();
+
+  if (!c)
+    return;
+}
+
+
+
+
+
+
+
+
+
+

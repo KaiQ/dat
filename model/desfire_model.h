@@ -6,6 +6,7 @@
 #include <QColor>
 #include "desfire/card.h"
 #include "desfire/device.h"
+#include "desfire/desfireFile.h"
 
 
 class DesfireModel : public QAbstractItemModel
@@ -23,6 +24,9 @@ class DesfireModel : public QAbstractItemModel
 
     void setDevice(nfc_device *device);
     void scanDevice();
+    Card* getActiveCard();
+    Application* getActiveApplication();
+    DesfireFile* getActiveFile();
 
   public slots:
     void select(const QModelIndex & index);

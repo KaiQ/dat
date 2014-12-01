@@ -4,10 +4,10 @@
 #include <nfc/nfc.h>
 #include <freefare.h>
 #include <QString>
-#include "desfire/file.h"
+#include "desfire/desfireFile.h"
 
 
-class BackupFile : public File
+class BackupFile : public DesfireFile
 {
   public:
     BackupFile(uint8_t filenumber, mifare_desfire_file_settings settings, Item* parent);

@@ -7,6 +7,9 @@
 #include <nfc/nfc.h>
 #include <freefare.h>
 #include <model/desfire_model.h>
+#include "desfire/card.h"
+#include "desfire/application.h"
+#include "desfire/desfireFile.h"
 
 namespace Ui {
   class MainWindow;
@@ -28,6 +31,7 @@ private:
 private slots:
   void deviceSelect();
   void deviceScan();
+  void showCardInfo();
 };
 
 #endif // MAINWINDOW_H
