@@ -27,6 +27,7 @@ class DesfireModel : public QAbstractItemModel
     Card* getActiveCard();
     Application* getActiveApplication();
     DesfireFile* getActiveFile();
+    QWidget* getWidget(const QModelIndex & index);
 
   public slots:
     void select(const QModelIndex & index);

@@ -32,6 +32,7 @@ private slots:
   void deviceSelect();
   void deviceScan();
   void showCardInfo();
+  void updateSelection(const QModelIndex & index);
 };
 
 #endif // MAINWINDOW_H

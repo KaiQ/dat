@@ -190,3 +190,16 @@ DesfireFile* DesfireModel::getActiveFile()
 
   return NULL;
 }
+
+
+QWidget* DesfireModel::getWidget(const QModelIndex & index)
+{
+  if (!index.isValid())
+  {
+    qDebug("selected an index not in list...");
+    return new QWidget();
+  }
+
+  Item *item = static_cast<Item*>(index.internalPointer());
+  return item->getWidget();
+}

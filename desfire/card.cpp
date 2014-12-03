@@ -2,7 +2,7 @@
 
 
 Card::Card(MifareTag _tag, Item* parent) :
-  Item(parent),
+  Item(parent, new QPushButton("Karte")),
   tag(_tag)
 {
   this->type = freefare_get_tag_friendly_name(_tag);
@@ -75,3 +75,4 @@ MifareTag Card::getTag()
 {
   return this->tag;
 }
+

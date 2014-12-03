@@ -3,12 +3,13 @@
 
 #include <QVector>
 #include <QVariant>
+#include <QWidget>
 
 
 class Item
 {
   public:
-    Item(Item* parent = 0);
+    Item(Item* parent = 0, QWidget* widget = 0);
     virtual ~Item() = 0;
     virtual QVariant data(int role) const = 0;
     virtual int select() = 0;
@@ -22,6 +23,7 @@ class Item
     bool isActive();
     void setActive(bool value = false);
     Item* getActiveChild();
+    virtual QWidget* getWidget();
 
   protected:
     QVector<Item*> children;
@@ -29,6 +31,7 @@ class Item
 
   private:
     Item *parentItem;
+    QWidget* widget;
 };
 
 

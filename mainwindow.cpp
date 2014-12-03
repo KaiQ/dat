@@ -31,6 +31,18 @@ MainWindow::MainWindow(QWidget *parent) :
       SIGNAL(doubleClicked(const QModelIndex&)),
       this->model,
       SLOT(select(const QModelIndex&)));
+  connect(this->ui->cardList,
+      SIGNAL(clicked(const QModelIndex&)),
+      this,
+      SLOT(updateSelection(const QModelIndex&)));
+  connect(this->ui->applicationList,
+      SIGNAL(clicked(const QModelIndex&)),
+      this,
+      SLOT(updateSelection(const QModelIndex&)));
+  connect(this->ui->fileList,
+      SIGNAL(clicked(const QModelIndex&)),
+      this,
+      SLOT(updateSelection(const QModelIndex&)));
 }
 
 
@@ -112,7 +124,11 @@ void MainWindow::showCardInfo()
 }
 
 
-
+void MainWindow::updateSelection(const QModelIndex & index)
+{
+  this->ui->scrollArea->takeWidget();
+  this->ui->scrollArea->setWidget(this->model->getWidget(index));
+}
 
 
 

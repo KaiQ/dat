@@ -2,7 +2,7 @@
 
 
 Application::Application(MifareDESFireAID _aid, Item* parent) :
-  Item(parent),
+  Item(parent, new QPushButton("Application")),
   aid(_aid)
 {
   this->name.sprintf("%06X", mifare_desfire_aid_get_aid(_aid));
@@ -104,4 +104,5 @@ void Application::deselect()
   this->children.clear();
   this->active = false;
 }
+
 

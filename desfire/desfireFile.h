@@ -5,6 +5,7 @@
 #include <freefare.h>
 #include <QString>
 #include <QWidget>
+#include <QPushButton>
 #include "item.h"
 
 

@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>786</width>
+    <width>792</width>
     <height>433</height>
    </rect>
   </property>
@@ -224,22 +224,20 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMaximumSize</enum>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
       </property>
-     </layout>
-    </item>
-    <item>
-     <widget class="QStackedWidget" name="stackedWidget">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <widget class="QWidget" name="page"/>
-      <widget class="QWidget" name="page_2"/>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>770</width>
+         <height>123</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -258,7 +256,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>786</width>
+     <width>792</width>
      <height>23</height>
     </rect>
    </property>
@@ -540,6 +538,38 @@
     <hint type="destinationlabel">
      <x>241</x>
      <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cardList</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>applicationList</receiver>
+   <slot>setRootIndex(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>applicationList</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>fileList</receiver>
+   <slot>setRootIndex(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>395</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>171</y>
     </hint>
    </hints>
   </connection>

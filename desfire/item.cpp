@@ -1,9 +1,10 @@
 #include "item.h"
 
 
-Item::Item(Item* parent)
+Item::Item(Item* parent, QWidget* _widget)
 {
   this->parentItem = parent;
+  this->widget = _widget;
   this->active = false;
 }
 
@@ -96,3 +97,7 @@ Item* Item::getActiveChild()
 
 
 
+QWidget* Item::getWidget()
+{
+  return this->widget;
+}
