@@ -27,10 +27,12 @@ MainWindow::MainWindow(QWidget *parent) :
       SIGNAL(doubleClicked(const QModelIndex&)),
       this->model,
       SLOT(select(const QModelIndex&)));
+  /* Needed?
   connect(this->ui->fileList,
       SIGNAL(doubleClicked(const QModelIndex&)),
       this->model,
       SLOT(select(const QModelIndex&)));
+  */
   connect(this->ui->cardList,
       SIGNAL(clicked(const QModelIndex&)),
       this,

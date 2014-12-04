@@ -43,7 +43,6 @@ QVariant DesfireModel::data(const QModelIndex &index, int role) const
   if ( role == Qt::BackgroundRole )
     if ( item->isActive() )
     {
-      qDebug("return green");
       return QColor(Qt::green);
     }
 

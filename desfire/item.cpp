@@ -12,6 +12,7 @@ Item::Item(Item* parent, QWidget* _widget)
 Item::~Item()
 {
   qDebug("Destructor Item");
+  delete this->widget;
 }
 
 
@@ -100,4 +101,10 @@ Item* Item::getActiveChild()
 QWidget* Item::getWidget()
 {
   return this->widget;
+}
+
+
+void Item::setWidget(QWidget* w)
+{
+  this->widget = w;
 }

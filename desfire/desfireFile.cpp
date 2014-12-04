@@ -2,7 +2,7 @@
 
 
 DesfireFile::DesfireFile(uint8_t _filenumber, mifare_desfire_file_settings _settings, Item* parent) :
-  Item(parent, new QPushButton("Datei")),
+  Item(parent, new StdFileWidget()),
   settings(_settings),
   filenumber(_filenumber)
 {

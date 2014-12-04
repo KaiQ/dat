@@ -26,6 +26,7 @@ class Item
     virtual QWidget* getWidget();
 
   protected:
+    void setWidget(QWidget*);
     QVector<Item*> children;
     bool active;
 

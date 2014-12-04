@@ -1,12 +1,14 @@
 #include "card.h"
+#include "widgets/cardwidget.h"
 
 
 Card::Card(MifareTag _tag, Item* parent) :
-  Item(parent, new QPushButton("Karte")),
+  Item(parent),
   tag(_tag)
 {
   this->type = freefare_get_tag_friendly_name(_tag);
   this->uid = freefare_get_tag_uid(_tag);
+  this->setWidget(new CardWidget(this));
 }
 
 

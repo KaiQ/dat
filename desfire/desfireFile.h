@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include "item.h"
+#include "widgets/stdfilewidget.h"
 
 
 class DesfireFile : public Item
