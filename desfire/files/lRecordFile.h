@@ -4,6 +4,7 @@
 #include <nfc/nfc.h>
 #include <freefare.h>
 #include <QString>
+#include "widgets/lrecordfilewidget.h"
 #include "desfire/desfireFile.h"
 
 

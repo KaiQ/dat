@@ -114,20 +114,10 @@ void MainWindow::deviceScan()
 }
 
 
-void MainWindow::showCardInfo()
-{
-  if (!this->model)
-    return;
-
-  Card* c = this->model->getActiveCard();
-
-  if (!c)
-    return;
-}
-
-
+// Change Widget after New Item was clicked
 void MainWindow::updateSelection(const QModelIndex & index)
 {
+  // first remove old... so it's not be deleted
   this->ui->scrollArea->takeWidget();
   this->ui->scrollArea->setWidget(this->model->getWidget(index));
 }

@@ -1,8 +1,8 @@
 #include "desfireFile.h"
 
 
-DesfireFile::DesfireFile(uint8_t _filenumber, mifare_desfire_file_settings _settings, Item* parent) :
-  Item(parent, new StdFileWidget()),
+DesfireFile::DesfireFile(uint8_t _filenumber, mifare_desfire_file_settings _settings, QWidget* widget, Item* parent) :
+  Item(parent, widget),
   settings(_settings),
   filenumber(_filenumber)
 {

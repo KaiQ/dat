@@ -21,6 +21,10 @@ SOURCES +=  main.cpp\
             desfire/files/lRecordFile.cpp \
             model/desfire_model.cpp \
             widgets/stdfilewidget.cpp \
+            widgets/backupfilewidget.cpp \
+            widgets/valuefilewidget.cpp \
+            widgets/lrecordfilewidget.cpp \
+            widgets/crecordfilewidget.cpp \
             widgets/cardwidget.cpp \
             widgets/applicationwidget.cpp
 
@@ -39,11 +43,19 @@ HEADERS  += mainwindow.h \
             desfire/files/lRecordFile.h \
             model/desfire_model.h \
             widgets/stdfilewidget.h \
+            widgets/backupfilewidget.h \
+            widgets/valuefilewidget.h \
+            widgets/lrecordfilewidget.h \
+            widgets/crecordfilewidget.h \
             widgets/cardwidget.h \
             widgets/applicationwidget.h
 
 FORMS    += GUI/mainwindow.ui \
             GUI/stdfilewidget.ui \
+            GUI/backupfilewidget.ui \
+            GUI/valuefilewidget.ui \
+            GUI/lrecordfilewidget.ui \
+            GUI/crecordfilewidget.ui \
             GUI/cardwidget.ui \
             GUI/applicationwidget.ui
 

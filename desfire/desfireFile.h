@@ -7,13 +7,15 @@
 #include <QWidget>
 #include <QPushButton>
 #include "item.h"
-#include "widgets/stdfilewidget.h"
 
 
 class DesfireFile : public Item
 {
   public:
-    DesfireFile(uint8_t filenumber, mifare_desfire_file_settings settings, Item* parent = 0);
+    DesfireFile(uint8_t filenumber,
+        mifare_desfire_file_settings settings,
+        QWidget* widget = NULL,
+        Item* parent = NULL);
     ~DesfireFile();
     int select();
     void deselect();
