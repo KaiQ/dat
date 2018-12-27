@@ -8,23 +8,23 @@ Card::Card(MifareTag _tag, Item* parent) :
 {
   this->type = freefare_get_tag_friendly_name(_tag);
   this->uid = freefare_get_tag_uid(_tag);
-  this->setWidget(new CardWidget(this));
+  this->setWidget(new CardWidget());
 }
 
 
 Card::~Card()
 {
-  qDebug("Destructor Card");
+  qDebug() << "Destructor Card";
 
   if (this->isActive())
   {
-    qDebug("found active");
+    qDebug() << "found active";
     this->deselect();
   }
 }
 
 
-QVariant Card::data(int role) const
+QVariant Card::data(int column, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
@@ -39,14 +39,14 @@ QVariant Card::data(int role) const
 
 int Card::select()
 {
-  qDebug("select Card");
+  qDebug() << "select Card";
   size_t aid_count = 0;
 
   mifare_desfire_connect(this->tag);
 
   mifare_desfire_get_application_ids (this->tag, &this->aids, &aid_count);
 
-  printf("found %ld aids\n", aid_count);
+  qDebug() << QString("found %1 aids").arg(aid_count);
   fflush(stdout);
 
   for (unsigned int i = 0; i < aid_count; i++ )
@@ -55,21 +55,18 @@ int Card::select()
     this->addChild(newApplication);
   }
 
-  this->active = true;
+  reinterpret_cast<CardWidget*>(this->getWidget())->setup(*this);
+
   return 0;
 }
 
 
 void Card::deselect()
 {
-  qDebug("deselect Card");
-  qDeleteAll(this->children);
-  this->children.clear();
+  qDebug() << "deselect Card";
 
   if (this->tag)
     mifare_desfire_disconnect(this->tag);
-
-  this->active = false;
 }
 
 

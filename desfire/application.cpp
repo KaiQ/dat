@@ -11,21 +11,22 @@ Application::Application(MifareDESFireAID _aid, Item* parent) :
 
 Application::~Application()
 {
-  qDebug("Destructor Application");
+  qDebug() << "Destructor Application";
 
   if (this->isActive())
   {
-    qDebug("found active");
+    qDebug() << "found active";
     this->deselect();
   }
 }
 
 
-QVariant Application::data(int role) const
+QVariant Application::data(int column, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
-    return this->name;
+    return QString("Application [%1]")
+      .arg(this->name);
   }
 
   return QVariant();
@@ -35,74 +36,55 @@ QVariant Application::data(int role) const
 
 int Application::select()
 {
-  qDebug("select Application");
+  qDebug() << "select Application";
   uint8_t *files;
   size_t file_count = 0;
-  size_t aid_count = 0;
 
-  Card *card = dynamic_cast<Card *>(this->parent());
+  Card *card = reinterpret_cast<Card *>(this->parent());
 
   mifare_desfire_select_application (card->getTag(), this->aid);
 
   mifare_desfire_get_file_ids(card->getTag(), &files, &file_count);
 
-  /*
-     if ( mifare_desfire_last_picc_error(tag[lSelTag]) == AUTHENTICATION_ERROR) {
-     printf("AUTHENTICATION_ERROR\n");
-     fflush(stdout);
-     if ( mifare_desfire_authenticate(tag[lSelTag], defaultKeyNumber, defaultKey) < 0 ) {
-     Key k(NULL,tag[lSelTag]);
-     k.show();
-     k.exec();
-     k.Auth();
-     }
-     mifare_desfire_get_file_ids(tag[lSelTag], &files, &file_count);
-     }
-     */
-
   struct mifare_desfire_file_settings set;
   memset(&set,0,sizeof(mifare_desfire_file_settings));
 
-  for(int i=0; i<file_count; i++)
+  for(size_t i=0; i<file_count; i++)
   {
     mifare_desfire_get_file_settings(card->getTag(), files[i], &set);
     if(set.file_type == MDFT_STANDARD_DATA_FILE)
     {
-      StdFile *file = new StdFile(i, set, this);
+      StdFile *file = new StdFile(files[i], set, this);
       this->addChild(file);
     } else if(set.file_type == MDFT_BACKUP_DATA_FILE)
     {
-      BackupFile *file = new BackupFile(i, set, this);
+      StdFile *file = new StdFile(files[i], set, this);
+      //BackupFile *file = new BackupFile(files[i], set, this);
       this->addChild(file);
     } else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP)
     {
-      ValueFile *file = new ValueFile(i, set, this);
+      ValueFile *file = new ValueFile(files[i], set, this);
       this->addChild(file);
     } else if(set.file_type == MDFT_LINEAR_RECORD_FILE_WITH_BACKUP)
     {
-      LRecordFile *file = new LRecordFile(i, set, this);
+      LRecordFile *file = new LRecordFile(files[i], set, this);
       this->addChild(file);
     } else if(set.file_type == MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP)
     {
-      CRecordFile *file = new CRecordFile(i, set, this);
+      CRecordFile *file = new CRecordFile(files[i], set, this);
       this->addChild(file);
     } else
     {
-      qDebug("Error get File settings");
+      qDebug() << "Error get File settings";
     }
   }
-
-  this->active = true;
   return 0;
 }
 
 
 void Application::deselect()
 {
-  qDebug("deselect Application");
-  qDeleteAll(this->children);
-  this->children.clear();
-  this->active = false;
+  qDebug() << "deselect Application";
 }
 
 

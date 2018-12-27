@@ -11,22 +11,21 @@ Device::Device(nfc_device *_device, Item* parent) :
 
 Device::~Device()
 {
-  qDebug("Destructor Device");
+  qDebug() << "Destructor Device";
 
   if (this->isActive())
   {
-    qDebug("found active");
+    qDebug() << "found active";
     this->deselect();
   }
 }
 
 
-QVariant Device::data(int role) const
+QVariant Device::data(int column, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
     return "Device Name";
-    //TODO?
   }
 
   return QVariant();
@@ -35,10 +34,13 @@ QVariant Device::data(int role) const
 
 int Device::select()
 {
-  MifareTag *tags = freefare_get_tags(this->device);
+  FreefareTag *tags = freefare_get_tags(this->device);
 
   if (!tags)
+  {
+    qDebug() << "no tags found";
     return -1; //TODO ERROR MESSAGE CODE
+  }
 
   for (int i = 0; tags[i]; i++)
   {
@@ -46,24 +48,21 @@ int Device::select()
     this->addChild(newCard);
   }
 
-  this->active = true;
   return this->childCount();
 }
 
 
 void Device::deselect()
 {
-  qDebug("deselect Device :-)");
+  qDebug() << "deselect Device :-)";
   qDeleteAll(this->children);
   this->children.clear();
 
   if (this->device)
   {
-    qDebug("close Device");
+    qDebug() << "close Device";
     nfc_close(this->device);
   }
-
-  this->active = false;
 }
 
 

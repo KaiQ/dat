@@ -2,6 +2,7 @@
 #define STDFILEWIDGET_H
 
 #include <QWidget>
+#include "../desfire/files/valueFile.h"
 
 namespace Ui {
   class ValueFileWidget;
@@ -14,6 +15,7 @@ class ValueFileWidget : public QWidget
 public:
   explicit ValueFileWidget(QWidget *parent = 0);
   ~ValueFileWidget();
+  void setup(ValueFile &file);
 
 private:
   Ui::ValueFileWidget *ui;

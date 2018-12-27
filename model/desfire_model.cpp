@@ -29,7 +29,7 @@ int DesfireModel::rowCount(const QModelIndex & parent) const
 
 int DesfireModel::columnCount(const QModelIndex & /*parent*/) const
 {
-  return 1;
+  return 2;
 }
 
 
@@ -41,12 +41,19 @@ QVariant DesfireModel::data(const QModelIndex &index, int role) const
   Item *item = static_cast<Item*>(index.internalPointer());
 
   if ( role == Qt::BackgroundRole )
+  {
     if ( item->isActive() )
     {
-      return QColor(Qt::green);
+      return QColor(23, 192, 6, 50);
     }
+  }
 
-  return item->data(role);
+  if (index.column() == 1)
+  {
+    return QString();
+  }
+
+  return item->data(index.column(), role);
 }
 
 
@@ -90,50 +97,70 @@ void DesfireModel::select(const QModelIndex & index)
 {
   if (!index.isValid())
   {
-    qDebug("selected an invalid index? o.0");
+    qDebug() << "selected an invalid index? o.0";
     return;
   }
 
   Item *item = static_cast<Item*>(index.internalPointer());
-  Item *parent = item->parent();
-  Item *active = parent->getActiveChild();
 
-  if (active == item)
+  if (item->isActive())
   {
-    qDebug("activating an active Item");
+    qDebug() << "activating an active Item";
     return;
   }
 
-  if (active)
+  // Get the highest active parent
+  Item *activeParent = item;
+  while (!activeParent->isActive())
   {
-    qDebug("deselecting active Item first");
-    int to = item->childCount();
-    active->deselect();
-    qDebug("deselecting active Item done");
-    /* // brings bugs xD
-    beginRemoveRows(index,
-        0,
-        to);
-    endInsertRows();
-    */
-    QModelIndex oldActiveIndex = this->index(active->row(), index.column(), index.parent());
-    this->dataChanged(oldActiveIndex, oldActiveIndex);
+    activeParent = activeParent->parent();
   }
 
-  qDebug("selecting next active item");
+  // find the lowest activated item from the active parent
+  Item *lowestActive = activeParent;
+  while (lowestActive->getActiveChild())
+  {
+    lowestActive = lowestActive->getActiveChild();
+  }
+
+  // deselect lowest activated item until highest active parent is reached
+  while (lowestActive != activeParent)
+  {
+    lowestActive->deselect();
+    lowestActive->setActive(false);
+    this->dataChanged(this->createIndex(lowestActive->row(), 0, lowestActive),
+                      this->createIndex(lowestActive->row(), columnCount(), lowestActive));
+    lowestActive = lowestActive->parent();
+  }
+
+  while (activeParent != item->parent())
+  {
+    Item *nextActiveParent = item;
+    while (nextActiveParent->parent() != activeParent)
+    {
+      nextActiveParent = nextActiveParent->parent();
+    }
+
+    if (nextActiveParent->select() < 0)
+    {
+      qDebug() << "could not activate parent";
+      return;
+    };
+    nextActiveParent->setActive(true);
+    activeParent = nextActiveParent;
+  }
+
   int from = item->childCount();
   if (item->select() >= 0)
   {
-    qDebug("selecting next active item done");
-    //TODO necessary?
+    item->setActive(true);
+    qDebug() << "selecting next active item done";
     beginInsertRows(index,
         from,
         item->childCount());
     endInsertRows();
     this->dataChanged(index, index);
-    qDebug("events about rows inserted");
-    //TODO ERROR MESSAGE CODE
-    return;
+    qDebug() << "events about rows inserted";
   }
 }
 
@@ -191,11 +218,11 @@ DesfireFile* DesfireModel::getActiveFile()
 }
 
 
-QWidget* DesfireModel::getWidget(const QModelIndex & index)
+QWidget* DesfireModel::getWidget(const QModelIndex &index)
 {
   if (!index.isValid())
   {
-    qDebug("selected an index not in list...");
+    qDebug() << "selected an index not in list...";
     return new QWidget();
   }
 

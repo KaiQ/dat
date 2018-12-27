@@ -13,12 +13,13 @@ class CardWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit CardWidget(Card *card, QWidget *parent = 0);
+  explicit CardWidget(QWidget *parent = 0);
   ~CardWidget();
+
+  void setup(Card &card);
 
 private:
   Ui::CardWidget *ui;
-  Card* card;
 };
 
 #endif // CARDWIDGET_H

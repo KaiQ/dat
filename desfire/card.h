@@ -13,17 +13,18 @@
 class Card : public Item
 {
   public:
-    Card(MifareTag tag, Item* parent = 0);
+    Card(FreefareTag tag, Item* parent = 0);
     ~Card();
-    QVariant data(int role) const;
+    QVariant data(int column, int role) const;
     int select();
     void deselect();
-    MifareTag getTag();
-
-  private:
+    FreefareTag getTag();
     QString uid;
     QString type;
-    MifareTag tag;
+
+  private:
+
+    FreefareTag tag;
     MifareDESFireAID *aids;
 };
 

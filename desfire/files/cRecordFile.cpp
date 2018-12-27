@@ -1,4 +1,5 @@
 #include "cRecordFile.h"
+#include "widgets/crecordfilewidget.h"
 
 
 CRecordFile::CRecordFile(uint8_t filenumber, mifare_desfire_file_settings settings, Item* parent) :
@@ -12,7 +13,7 @@ CRecordFile::~CRecordFile()
 }
 
 
-QVariant CRecordFile::data(int role) const
+QVariant CRecordFile::data(int column, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
@@ -22,3 +23,7 @@ QVariant CRecordFile::data(int role) const
   return QVariant();
 }
 
+void CRecordFile::setupWidget()
+{
+  //reinterpret_cast<CRecordFileWidget*>(this->getWidget())->setup(*this);
+}

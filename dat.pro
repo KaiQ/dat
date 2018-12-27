@@ -26,7 +26,8 @@ SOURCES +=  main.cpp\
             widgets/lrecordfilewidget.cpp \
             widgets/crecordfilewidget.cpp \
             widgets/cardwidget.cpp \
-            widgets/applicationwidget.cpp
+            widgets/applicationwidget.cpp \
+            widgets/filewidget.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -48,7 +49,8 @@ HEADERS  += mainwindow.h \
             widgets/lrecordfilewidget.h \
             widgets/crecordfilewidget.h \
             widgets/cardwidget.h \
-            widgets/applicationwidget.h
+            widgets/applicationwidget.h \
+            widgets/filewidget.h
 
 FORMS    += GUI/mainwindow.ui \
             GUI/stdfilewidget.ui \
@@ -57,7 +59,8 @@ FORMS    += GUI/mainwindow.ui \
             GUI/lrecordfilewidget.ui \
             GUI/crecordfilewidget.ui \
             GUI/cardwidget.ui \
-            GUI/applicationwidget.ui
+            GUI/applicationwidget.ui \
+            GUI/filewidget.ui
 
 LIBS += -lnfc -lfreefare
 

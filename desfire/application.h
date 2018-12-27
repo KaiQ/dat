@@ -17,7 +17,7 @@ class Application : public Item
   public:
     Application(MifareDESFireAID aid, Item* parent = 0);
     ~Application();
-    QVariant data(int role) const;
+    QVariant data(int column, int role) const;
     int select();
     void deselect();
 

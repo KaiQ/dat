@@ -1,4 +1,5 @@
 #include "backupFile.h"
+#include "widgets/backupfilewidget.h"
 
 
 BackupFile::BackupFile(uint8_t filenumber, mifare_desfire_file_settings settings, Item* parent) :
@@ -12,7 +13,7 @@ BackupFile::~BackupFile()
 }
 
 
-QVariant BackupFile::data(int role) const
+QVariant BackupFile::data(int column, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
@@ -20,5 +21,10 @@ QVariant BackupFile::data(int role) const
   }
 
   return QVariant();
+}
+
+void BackupFile::setupWidget()
+{
+  //reinterpret_cast<BackupFileWidget*>(this->getWidget())->setup(*this);
 }
 

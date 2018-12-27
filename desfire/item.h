@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QVariant>
 #include <QWidget>
+#include <QDebug>
 
 
 class Item
@@ -11,7 +12,7 @@ class Item
   public:
     Item(Item* parent = 0, QWidget* widget = 0);
     virtual ~Item() = 0;
-    virtual QVariant data(int role) const = 0;
+    virtual QVariant data(int column, int role) const = 0;
     virtual int select() = 0;
     virtual void deselect() = 0;
     int childCount();
@@ -28,11 +29,12 @@ class Item
   protected:
     void setWidget(QWidget*);
     QVector<Item*> children;
-    bool active;
 
   private:
-    Item *parentItem;
     QWidget* widget;
+    bool active;
+    Item *parentItem;
+
 };
 
 

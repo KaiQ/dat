@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>792</width>
-    <height>433</height>
+    <height>436</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -55,172 +55,34 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QSplitter" name="splitter">
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+     <widget class="QTreeView" name="treeView">
+      <property name="editTriggers">
+       <set>QAbstractItemView::DoubleClicked</set>
       </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+      <property name="showDropIndicator" stdset="0">
+       <bool>false</bool>
       </property>
-      <widget class="QWidget" name="verticalLayoutWidget_3">
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Cards</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTreeView" name="cardList">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>220</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
-          </property>
-          <property name="itemsExpandable">
-           <bool>false</bool>
-          </property>
-          <property name="expandsOnDoubleClick">
-           <bool>false</bool>
-          </property>
-          <attribute name="headerVisible">
-           <bool>false</bool>
-          </attribute>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="verticalLayoutWidget_2">
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>26</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Applications</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTreeView" name="applicationList">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>220</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::DoubleClicked</set>
-          </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
-          </property>
-          <property name="itemsExpandable">
-           <bool>false</bool>
-          </property>
-          <property name="expandsOnDoubleClick">
-           <bool>false</bool>
-          </property>
-          <attribute name="headerVisible">
-           <bool>false</bool>
-          </attribute>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="verticalLayoutWidget">
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <property name="spacing">
-         <number>6</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Files</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTreeView" name="fileList">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>220</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
-          </property>
-          <property name="itemsExpandable">
-           <bool>false</bool>
-          </property>
-          <property name="expandsOnDoubleClick">
-           <bool>false</bool>
-          </property>
-          <attribute name="headerVisible">
-           <bool>false</bool>
-          </attribute>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="uniformRowHeights">
+       <bool>false</bool>
+      </property>
+      <property name="headerHidden">
+       <bool>false</bool>
+      </property>
+      <attribute name="headerVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="headerCascadingSectionResizes">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="headerDefaultSectionSize">
+       <number>400</number>
+      </attribute>
+      <attribute name="headerMinimumSectionSize">
+       <number>100</number>
+      </attribute>
      </widget>
     </item>
     <item>
@@ -233,8 +95,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>770</width>
-         <height>123</height>
+         <width>772</width>
+         <height>159</height>
         </rect>
        </property>
       </widget>
@@ -257,12 +119,12 @@
      <x>0</x>
      <y>0</y>
      <width>792</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuProgram">
     <property name="title">
-     <string>Program</string>
+     <string>P&amp;rogram</string>
     </property>
     <addaction name="actionDevice"/>
     <addaction name="actionScan"/>
@@ -270,10 +132,10 @@
    </widget>
    <widget class="QMenu" name="menuCard">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
-     <string>Card</string>
+     <string>&amp;Card</string>
     </property>
     <addaction name="actionCard_Info"/>
     <addaction name="actionFree_Memory"/>
@@ -284,14 +146,14 @@
    </widget>
    <widget class="QMenu" name="menuApplication">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
      <string>Application</string>
     </property>
     <widget class="QMenu" name="menuCreate_File">
      <property name="title">
-      <string>Create File</string>
+      <string>Create &amp;File</string>
      </property>
      <addaction name="actionStandard_File"/>
      <addaction name="actionBackup_File"/>
@@ -307,10 +169,10 @@
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
-     <string>File</string>
+     <string>Fi&amp;le</string>
     </property>
     <addaction name="actionDelete_File"/>
     <addaction name="actionCommit_Transaction"/>
@@ -332,7 +194,7 @@
   </widget>
   <action name="actionExit">
    <property name="text">
-    <string>Exit</string>
+    <string>&amp;Exit</string>
    </property>
   </action>
   <action name="actionCard_Info">
@@ -340,32 +202,32 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Card Info</string>
+    <string>&amp;Card Info</string>
    </property>
   </action>
   <action name="actionScan">
    <property name="text">
-    <string>Scan</string>
+    <string>&amp;Scan</string>
    </property>
   </action>
   <action name="actionFree_Memory">
    <property name="text">
-    <string>Free Memory</string>
+    <string>&amp;Free Memory</string>
    </property>
   </action>
   <action name="actionFormat_PICC">
    <property name="text">
-    <string>Format PICC</string>
+    <string>Format &amp;PICC</string>
    </property>
   </action>
   <action name="actionSet_Default_Key">
    <property name="text">
-    <string>Set Default Key</string>
+    <string>&amp;Set Default Key</string>
    </property>
   </action>
   <action name="actionDevice">
    <property name="text">
-    <string>Device...</string>
+    <string>&amp;Device...</string>
    </property>
   </action>
   <action name="actionKey_Settings_info">
@@ -373,27 +235,27 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Key Settings Info</string>
+    <string>&amp;Key Settings Info</string>
    </property>
   </action>
   <action name="actionAuthenticate">
    <property name="text">
-    <string>Authenticate</string>
+    <string>&amp;Authenticate</string>
    </property>
   </action>
   <action name="actionChange_Key_Settings">
    <property name="text">
-    <string>Change Key Settings</string>
+    <string>&amp;Change Key Settings</string>
    </property>
   </action>
   <action name="actionCreate_Application">
    <property name="text">
-    <string>Create Application</string>
+    <string>C&amp;reate Application</string>
    </property>
   </action>
   <action name="actionDelete_Application">
    <property name="text">
-    <string>Delete Application</string>
+    <string>&amp;Delete Application</string>
    </property>
   </action>
   <action name="actionGet_File_Settings">
@@ -406,22 +268,22 @@
   </action>
   <action name="actionDelete_File">
    <property name="text">
-    <string>Delete File</string>
+    <string>&amp;Delete File</string>
    </property>
   </action>
   <action name="actionCommit_Transaction">
    <property name="text">
-    <string>Commit Transaction</string>
+    <string>&amp;Commit Transaction</string>
    </property>
   </action>
   <action name="actionAbort_Transaction">
    <property name="text">
-    <string>Abort Transaction</string>
+    <string>&amp;Abort Transaction</string>
    </property>
   </action>
   <action name="actionRead_Data">
    <property name="text">
-    <string>Read Data</string>
+    <string>&amp;Read Data</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -429,7 +291,7 @@
   </action>
   <action name="actionWrite_Data">
    <property name="text">
-    <string>Write Data</string>
+    <string>&amp;Write Data</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -437,7 +299,7 @@
   </action>
   <action name="actionGet_Value">
    <property name="text">
-    <string>get Value</string>
+    <string>&amp;get Value</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -453,7 +315,7 @@
   </action>
   <action name="actionDebit">
    <property name="text">
-    <string>Debit</string>
+    <string>D&amp;ebit</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -461,7 +323,7 @@
   </action>
   <action name="actionLimited_Credit">
    <property name="text">
-    <string>Limited Credit</string>
+    <string>&amp;Limited Credit</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -469,7 +331,7 @@
   </action>
   <action name="actionWrite_Record">
    <property name="text">
-    <string>Write Record</string>
+    <string>Wr&amp;ite Record</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -477,7 +339,7 @@
   </action>
   <action name="actionRead_Record">
    <property name="text">
-    <string>Read Record</string>
+    <string>Read Rec&amp;ord</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -485,7 +347,7 @@
   </action>
   <action name="actionClear_Record_File">
    <property name="text">
-    <string>Clear Record File</string>
+    <string>Clear Record &amp;File</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -493,32 +355,32 @@
   </action>
   <action name="actionConfiguration">
    <property name="text">
-    <string>Configuration</string>
+    <string>C&amp;onfiguration</string>
    </property>
   </action>
   <action name="actionStandard_File">
    <property name="text">
-    <string>Standard File</string>
+    <string>&amp;Standard File</string>
    </property>
   </action>
   <action name="actionBackup_File">
    <property name="text">
-    <string>Backup File</string>
+    <string>&amp;Backup File</string>
    </property>
   </action>
   <action name="actionValue_File">
    <property name="text">
-    <string>Value File</string>
+    <string>&amp;Value File</string>
    </property>
   </action>
   <action name="actionLinear_Record_File">
    <property name="text">
-    <string>Linear Record File</string>
+    <string>&amp;Linear Record File</string>
    </property>
   </action>
   <action name="actionCyclic_Record_File">
    <property name="text">
-    <string>Cyclic Record File</string>
+    <string>&amp;Cyclic Record File</string>
    </property>
   </action>
  </widget>
@@ -538,38 +400,6 @@
     <hint type="destinationlabel">
      <x>241</x>
      <y>199</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cardList</sender>
-   <signal>doubleClicked(QModelIndex)</signal>
-   <receiver>applicationList</receiver>
-   <slot>setRootIndex(QModelIndex)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>135</x>
-     <y>171</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>395</x>
-     <y>171</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>applicationList</sender>
-   <signal>doubleClicked(QModelIndex)</signal>
-   <receiver>fileList</receiver>
-   <slot>setRootIndex(QModelIndex)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>395</x>
-     <y>171</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>655</x>
-     <y>171</y>
     </hint>
    </hints>
   </connection>

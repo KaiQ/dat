@@ -1,17 +1,17 @@
 #include "item.h"
 
 
-Item::Item(Item* parent, QWidget* _widget)
+Item::Item(Item* parent, QWidget* widget):
+  parentItem(parent),
+  widget(widget),
+  active(false)
 {
-  this->parentItem = parent;
-  this->widget = _widget;
-  this->active = false;
 }
 
 
 Item::~Item()
 {
-  qDebug("Destructor Item");
+  qDebug() << "Destructor Item";
   delete this->widget;
 }
 
@@ -60,7 +60,7 @@ void Item::setParent(Item *parent)
 
 int Item::select()
 {
-  qDebug("setting active");
+  qDebug() << "setting active";
   this->active = true;
   return 0;
 }
@@ -68,7 +68,7 @@ int Item::select()
 
 void Item::deselect()
 {
-  qDebug("deselect Item ~.~");
+  qDebug() << "deselect Item ~.~";
   this->active = false;
 }
 
@@ -93,7 +93,7 @@ Item* Item::getActiveChild()
       return children[i];
   }
 
-  return NULL;
+  return nullptr;
 }
 
 

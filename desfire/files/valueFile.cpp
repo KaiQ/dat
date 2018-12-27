@@ -1,4 +1,5 @@
 #include "valueFile.h"
+#include "widgets/valuefilewidget.h"
 
 
 ValueFile::ValueFile(uint8_t filenumber, mifare_desfire_file_settings settings, Item* parent) :
@@ -12,7 +13,7 @@ ValueFile::~ValueFile()
 }
 
 
-QVariant ValueFile::data(int role) const
+QVariant ValueFile::data(int column, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
@@ -22,3 +23,7 @@ QVariant ValueFile::data(int role) const
   return QVariant();
 }
 
+void ValueFile::setupWidget()
+{
+  reinterpret_cast<ValueFileWidget*>(this->getSubWidget())->setup(*this);
+}
