@@ -58,8 +58,7 @@ int Application::select()
       this->addChild(file);
     } else if(set.file_type == MDFT_BACKUP_DATA_FILE)
     {
-      StdFile *file = new StdFile(files[i], set, this);
-      //BackupFile *file = new BackupFile(files[i], set, this);
+      BackupFile *file = new BackupFile(files[i], set, this);
       this->addChild(file);
     } else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP)
     {
