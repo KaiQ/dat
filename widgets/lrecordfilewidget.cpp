@@ -1,9 +1,8 @@
 #include "lrecordfilewidget.h"
 #include "ui_lrecordfilewidget.h"
 
-LRecordFileWidget::LRecordFileWidget(QWidget *parent) :
-  QWidget(parent),
-  file(nullptr),
+LRecordFileWidget::LRecordFileWidget(DesfireFile &file) :
+  FileInterface(file),
   ui(new Ui::LRecordFileWidget)
 {
   ui->setupUi(this);
@@ -19,10 +18,8 @@ LRecordFileWidget::~LRecordFileWidget()
   delete ui;
 }
 
-void LRecordFileWidget::setup(LRecordFile &file)
+void LRecordFileWidget::setupWidget()
 {
-  this->file = &file;
-
   ui->comboBox->clear();
   for (int i = 0; i < file.getSettings().settings.linear_record_file.current_number_of_records; i++)
   {
@@ -38,15 +35,10 @@ void LRecordFileWidget::setup(LRecordFile &file)
 
 void LRecordFileWidget::readRecord(int number)
 {
-  if (file == nullptr)
-  {
-    return;
-  }
-
   char *buffer;
-  auto fileSize = file->getSettings().settings.linear_record_file.record_size+1;
+  auto fileSize = file.getSettings().settings.linear_record_file.record_size+1;
 
-    buffer = (char *)calloc(fileSize * file->getSettings().settings.linear_record_file.current_number_of_records, sizeof(char));
+    buffer = (char *)calloc(fileSize * file.getSettings().settings.linear_record_file.current_number_of_records, sizeof(char));
 
     if(!buffer)
     {
@@ -54,12 +46,12 @@ void LRecordFileWidget::readRecord(int number)
       return;
     }
 
-    auto bytes = mifare_desfire_read_records(file->getTag(), file->getFilenumber(), number, 1, buffer);
+    auto bytes = mifare_desfire_read_records(file.getTag(), file.getFilenumber(), number, 1, buffer);
 
     if(bytes < 0)
     {
       qDebug() << "Error linear cyclic record file";
-      ui->textEdit->setText(QString("%1").arg(mifare_desfire_last_picc_error(file->getTag())));
+      ui->textEdit->setText(QString("<ERROR> could not read record"));
       return;
     }
 

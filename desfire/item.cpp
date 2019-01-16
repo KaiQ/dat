@@ -8,31 +8,25 @@ Item::Item(Item* parent, QWidget* widget):
 {
 }
 
-
 Item::~Item()
 {
-  qDebug() << "Destructor Item";
   delete this->widget;
 }
-
 
 Item* Item::child(int row)
 {
   return this->children[row];
 }
 
-
 int Item::childCount()
 {
   return this->children.count();
 }
 
-
 Item* Item::parent()
 {
   return this->parentItem;
 }
-
 
 int Item::row() const
 {
@@ -44,46 +38,37 @@ int Item::row() const
   return 0;
 }
 
-
 void Item::addChild(Item *child)
 {
   child->setParent(this);
   this->children.append(child);
 }
 
-
 void Item::setParent(Item *parent)
 {
   this->parentItem = parent;
 }
 
-
 int Item::select()
 {
-  qDebug() << "setting active";
   this->active = true;
   return 0;
 }
 
-
 void Item::deselect()
 {
-  qDebug() << "deselect Item ~.~";
   this->active = false;
 }
-
 
 bool Item::isActive()
 {
   return this->active;
 }
 
-
 void Item::setActive(bool value)
 {
   this->active = value;
 }
-
 
 Item* Item::getActiveChild()
 {
@@ -96,13 +81,10 @@ Item* Item::getActiveChild()
   return nullptr;
 }
 
-
-
 QWidget* Item::getWidget()
 {
   return this->widget;
 }
-
 
 void Item::setWidget(QWidget* w)
 {

@@ -2,8 +2,8 @@
 #include "ui_stdfilewidget.h"
 #include <QByteArray>
 
-StdFileWidget::StdFileWidget(QWidget *parent) :
-  QWidget(parent),
+StdFileWidget::StdFileWidget(DesfireFile &file) :
+  FileInterface(file),
   ui(new Ui::StdFileWidget)
 {
   ui->setupUi(this);
@@ -14,7 +14,7 @@ StdFileWidget::~StdFileWidget()
   delete ui;
 }
 
-void StdFileWidget::setup(StdFile &file)
+void StdFileWidget::setupWidget()
 {
   auto fileSize = file.getSettings().settings.standard_file.file_size+1;
   char *buffer = (char*)calloc(fileSize,sizeof(char));

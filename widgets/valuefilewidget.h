@@ -1,24 +1,25 @@
-#ifndef STDFILEWIDGET_H
-#define STDFILEWIDGET_H
+#ifndef VALUEFILEWIDGET_H
+#define VALUEFILEWIDGET_H
 
 #include <QWidget>
-#include "../desfire/files/valueFile.h"
+#include <interface/fileinterface.h>
 
 namespace Ui {
   class ValueFileWidget;
 }
 
-class ValueFileWidget : public QWidget
+class ValueFileWidget : public FileInterface
 {
   Q_OBJECT
 
 public:
-  explicit ValueFileWidget(QWidget *parent = 0);
+  ValueFileWidget(DesfireFile &file);
   ~ValueFileWidget();
-  void setup(ValueFile &file);
+
+  void setupWidget();
 
 private:
   Ui::ValueFileWidget *ui;
 };
 
-#endif // STDFILEWIDGET_H
+#endif // VALUEFILEWIDGET_H

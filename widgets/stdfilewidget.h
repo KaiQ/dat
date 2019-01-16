@@ -2,21 +2,21 @@
 #define STDFILEWIDGET_H
 
 #include <QWidget>
-#include "../desfire/files/stdFile.h"
+#include <interface/fileinterface.h>
 
 namespace Ui {
   class StdFileWidget;
 }
 
-class StdFileWidget : public QWidget
+class StdFileWidget : public FileInterface
 {
   Q_OBJECT
 
 public:
-  explicit StdFileWidget(QWidget *parent = 0);
+  StdFileWidget(DesfireFile &file);
   ~StdFileWidget();
 
-  void setup(StdFile &file);
+  void setupWidget();
 
 private:
   Ui::StdFileWidget *ui;

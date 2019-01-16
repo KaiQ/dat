@@ -1,22 +1,15 @@
-#ifndef STDFILEWIDGET_H
-#define STDFILEWIDGET_H
+#ifndef BACKUPFILEWIDGET_H
+#define BACKUPFILEWIDGET_H
 
-#include <QWidget>
+#include "widgets/stdfilewidget.h"
 
 namespace Ui {
   class BackupFileWidget;
 }
 
-class BackupFileWidget : public QWidget
+class BackupFileWidget : public StdFileWidget
 {
   Q_OBJECT
-
-public:
-  explicit BackupFileWidget(QWidget *parent = 0);
-  ~BackupFileWidget();
-
-private:
-  Ui::BackupFileWidget *ui;
 };
 
-#endif // STDFILEWIDGET_H
+#endif // BACKUPFILEWIDGET_H

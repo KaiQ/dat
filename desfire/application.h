@@ -6,11 +6,6 @@
 #include <QString>
 #include "item.h"
 #include "card.h"
-#include "desfire/files/stdFile.h"
-#include "desfire/files/backupFile.h"
-#include "desfire/files/valueFile.h"
-#include "desfire/files/cRecordFile.h"
-#include "desfire/files/lRecordFile.h"
 
 class Application : public Item
 {

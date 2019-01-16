@@ -3,10 +3,12 @@
 #include "widgets/filewidget.h"
 
 
-DesfireFile::DesfireFile(uint8_t _filenumber, mifare_desfire_file_settings _settings, QWidget* widget, Item* parent) :
-  Item(parent, new FileWidget(widget)),
-  filenumber(_filenumber),
-  settings(_settings)
+DesfireFile::DesfireFile(uint8_t filenumber,
+                         mifare_desfire_file_settings settings,
+                         Item *parent) :
+  Item(parent, new FileWidget(nullptr)),
+  filenumber(filenumber),
+  settings(settings)
 {
 }
 
@@ -18,8 +20,7 @@ int DesfireFile::select()
 {
   if (mifare_desfire_get_file_settings(this->getTag(), filenumber, &settings) >= 0)
   {
-    reinterpret_cast<FileWidget*>(this->getWidget())->setupRootWidget(this);
-    this->setupWidget();
+    reinterpret_cast<FileWidget*>(this->getWidget())->setupWidget(this);
   }
   return 0;
 }
@@ -44,11 +45,32 @@ uint8_t DesfireFile::getFilenumber()
   return filenumber;
 }
 
-void DesfireFile::setupRootWidget()
+QVariant DesfireFile::data(int column, int role) const
 {
+  if ( role == Qt::DisplayRole )
+  {
+    return QString("[%1] " + MapFileTypeToString(static_cast<mifare_desfire_file_types>(this->settings.file_type)))
+        .arg(this->filenumber, 2, 16, QChar('0'));
+  }
+
+  return QVariant();
 }
 
-QWidget* DesfireFile::getSubWidget()
+QString const DesfireFile::MapFileTypeToString(mifare_desfire_file_types fileType) const
 {
-  return reinterpret_cast<FileWidget*>(this->getWidget())->getSubWidget();
+  switch (fileType)
+  {
+    case MDFT_STANDARD_DATA_FILE:
+      return "Standard File";
+    case MDFT_BACKUP_DATA_FILE:
+      return "Backup File";
+    case MDFT_VALUE_FILE_WITH_BACKUP:
+      return "Value File";
+    case MDFT_LINEAR_RECORD_FILE_WITH_BACKUP:
+      return "Linear Record File";
+    case MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP:
+      return "Cyclic Record File";
+    default:
+      return "Unknown Filetype";
+  }
 }

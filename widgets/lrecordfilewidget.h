@@ -1,25 +1,24 @@
-#ifndef STDFILEWIDGET_H
-#define STDFILEWIDGET_H
+#ifndef LRECORDFILEWIDGET_H
+#define LRECORDFILEWIDGET_H
 
 #include <QWidget>
-#include "../desfire/files/lRecordFile.h"
+#include <interface/fileinterface.h>
 
 namespace Ui {
   class LRecordFileWidget;
 }
 
-class LRecordFileWidget : public QWidget
+class LRecordFileWidget : public FileInterface
 {
   Q_OBJECT
 
 public:
-  explicit LRecordFileWidget(QWidget *parent = 0);
+  LRecordFileWidget(DesfireFile &file);
   ~LRecordFileWidget();
 
-  void setup(LRecordFile &file);
+  void setupWidget();
 
 private:
-  LRecordFile *file;
   Ui::LRecordFileWidget *ui;
 
   void readRecord(int number);
@@ -28,4 +27,4 @@ private slots:
   void readRecord(QString number);
 };
 
-#endif // STDFILEWIDGET_H
+#endif // LRECORDFILEWIDGET_H

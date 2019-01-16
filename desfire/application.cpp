@@ -1,5 +1,5 @@
 #include "application.h"
-
+#include "desfire/desfireFile.h"
 
 Application::Application(MifareDESFireAID _aid, Item* parent) :
   Item(parent, new QPushButton("Application")),
@@ -49,33 +49,11 @@ int Application::select()
   struct mifare_desfire_file_settings set;
   memset(&set,0,sizeof(mifare_desfire_file_settings));
 
-  for(size_t i=0; i<file_count; i++)
+  for(size_t i = 0; i < file_count; i++)
   {
     mifare_desfire_get_file_settings(card->getTag(), files[i], &set);
-    if(set.file_type == MDFT_STANDARD_DATA_FILE)
-    {
-      StdFile *file = new StdFile(files[i], set, this);
-      this->addChild(file);
-    } else if(set.file_type == MDFT_BACKUP_DATA_FILE)
-    {
-      BackupFile *file = new BackupFile(files[i], set, this);
-      this->addChild(file);
-    } else if(set.file_type == MDFT_VALUE_FILE_WITH_BACKUP)
-    {
-      ValueFile *file = new ValueFile(files[i], set, this);
-      this->addChild(file);
-    } else if(set.file_type == MDFT_LINEAR_RECORD_FILE_WITH_BACKUP)
-    {
-      LRecordFile *file = new LRecordFile(files[i], set, this);
-      this->addChild(file);
-    } else if(set.file_type == MDFT_CYCLIC_RECORD_FILE_WITH_BACKUP)
-    {
-      CRecordFile *file = new CRecordFile(files[i], set, this);
-      this->addChild(file);
-    } else
-    {
-      qDebug() << "Error get File settings";
-    }
+    DesfireFile *file = new DesfireFile(files[i], set, this);
+    this->addChild(file);
   }
   return 0;
 }

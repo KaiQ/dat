@@ -1,22 +1,16 @@
-#ifndef STDFILEWIDGET_H
-#define STDFILEWIDGET_H
+#ifndef CRECORDFILEWIDGET_H
+#define CRECORDFILEWIDGET_H
 
 #include <QWidget>
+#include "widgets/lrecordfilewidget.h"
 
 namespace Ui {
   class CRecordFileWidget;
 }
 
-class CRecordFileWidget : public QWidget
+class CRecordFileWidget : public LRecordFileWidget
 {
   Q_OBJECT
-
-public:
-  explicit CRecordFileWidget(QWidget *parent = 0);
-  ~CRecordFileWidget();
-
-private:
-  Ui::CRecordFileWidget *ui;
 };
 
-#endif // STDFILEWIDGET_H
+#endif // CRECORDFILEWIDGET_H
