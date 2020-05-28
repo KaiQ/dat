@@ -11,10 +11,11 @@ class Application : public Item
 {
   public:
     Application(MifareDESFireAID aid, Item* parent = 0);
-    ~Application();
+    virtual ~Application();
     QVariant data(int column, int role) const;
     int select();
     void deselect();
+    FreefareTag getTag();
 
   private:
     MifareDESFireAID aid;

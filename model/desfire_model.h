@@ -13,7 +13,7 @@ class DesfireModel : public QAbstractItemModel
 {
   Q_OBJECT
   public:
-    DesfireModel(QObject *parent = NULL);
+    DesfireModel(QObject *parent = nullptr);
     ~DesfireModel();
     int rowCount(const QModelIndex &parent = QModelIndex()) const ;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;

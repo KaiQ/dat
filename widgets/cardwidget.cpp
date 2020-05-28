@@ -2,12 +2,17 @@
 #include "ui_cardwidget.h"
 #include <cmath>
 #include <QMessageBox>
+#include <GUI/createapplication.h>
 
 CardWidget::CardWidget(QWidget *parent) :
   QWidget(parent),
-  ui(new Ui::CardWidget)
+  ui(new Ui::CardWidget),
+  createApplicationWidget(parent)
 {
   ui->setupUi(this);
+  connect(ui->buttonCreateApplication, SIGNAL(clicked(bool)),
+          this, SLOT(OnClicked()));
+  ui->buttonCreateApplication->setEnabled(false);
 }
 
 CardWidget::~CardWidget()
@@ -84,4 +89,13 @@ void CardWidget::setup(Card &card)
                                                 .arg(settings & 0x02, 2, 16, QChar('0')));
   this->ui->allow_change_master_key->setText(QString("0x%1")
                                              .arg(settings & 0x01, 2, 16, QChar('0')));
+
+  ui->buttonCreateApplication->setEnabled(true);
+
+  createApplicationWidget.setTag(card.getTag());
+}
+
+void CardWidget::OnClicked()
+{
+  createApplicationWidget.exec();
 }

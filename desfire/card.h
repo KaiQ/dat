@@ -14,7 +14,7 @@ class Card : public Item
 {
   public:
     Card(FreefareTag tag, Item* parent = 0);
-    ~Card();
+    virtual ~Card();
     QVariant data(int column, int role) const;
     int select();
     void deselect();

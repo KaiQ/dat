@@ -19,9 +19,13 @@ int DesfireModel::rowCount(const QModelIndex & parent) const
   Item* item;
 
   if (!parent.isValid())
+  {
     item = this->rootItem;
+  }
   else
+  {
     item = static_cast<Item*>(parent.internalPointer());
+  }
 
   return item->childCount();
 }
@@ -36,7 +40,9 @@ int DesfireModel::columnCount(const QModelIndex & /*parent*/) const
 QVariant DesfireModel::data(const QModelIndex &index, int role) const
 {
   if (!index.isValid())
+  {
     return QVariant();
+  }
 
   Item *item = static_cast<Item*>(index.internalPointer());
 
@@ -65,14 +71,20 @@ QModelIndex DesfireModel::index(int row, int column, const QModelIndex &parent) 
   Item* item;
 
   if (!parent.isValid())
+  {
     item = this->rootItem;
+  }
   else
+  {
     item = static_cast<Item*>(parent.internalPointer());
+  }
 
   Item* child = item->child(row);
 
   if (child)
+  {
     return this->createIndex(row, column, child);
+  }
 
   return QModelIndex();
 }
@@ -81,7 +93,9 @@ QModelIndex DesfireModel::index(int row, int column, const QModelIndex &parent) 
 QModelIndex DesfireModel::parent(const QModelIndex &index) const
 {
   if (!index.isValid())
+  {
     return QModelIndex();
+  }
 
   Item* child = static_cast<Item*>(index.internalPointer());
   Item* parent = child->parent();
@@ -145,7 +159,7 @@ void DesfireModel::select(const QModelIndex & index)
     {
       qDebug() << "could not activate parent";
       return;
-    };
+    }
     nextActiveParent->setActive(true);
     activeParent = nextActiveParent;
   }
@@ -156,8 +170,8 @@ void DesfireModel::select(const QModelIndex & index)
     item->setActive(true);
     qDebug() << "selecting next active item done";
     beginInsertRows(index,
-        from,
-        item->childCount());
+                    from,
+                    item->childCount());
     endInsertRows();
     this->dataChanged(index, index);
     qDebug() << "events about rows inserted";
@@ -179,19 +193,20 @@ void DesfireModel::scanDevice()
   int from = this->rootItem->childCount();
   this->rootItem->select();
   beginInsertRows(QModelIndex(),
-      from,
-      this->rootItem->childCount());
+                  from,
+                  this->rootItem->childCount());
   endInsertRows();
-  fflush(stdout);
 }
 
 
 Card* DesfireModel::getActiveCard()
 {
   if (this->rootItem)
+  {
     return dynamic_cast<Card*>(this->rootItem->getActiveChild());
+  }
 
-  return NULL;
+  return nullptr;
 }
 
 
@@ -201,9 +216,11 @@ Application* DesfireModel::getActiveApplication()
   Card* c = getActiveCard();
 
   if (c)
+  {
     return dynamic_cast<Application*>(c->getActiveChild());
+  }
 
-  return NULL;
+  return nullptr;
 }
 
 
@@ -212,9 +229,11 @@ DesfireFile* DesfireModel::getActiveFile()
   Application* a = getActiveApplication();
 
   if (a)
+  {
     return dynamic_cast<DesfireFile*>(a->getActiveChild());
+  }
 
-  return NULL;
+  return nullptr;
 }
 
 
@@ -223,7 +242,7 @@ QWidget* DesfireModel::getWidget(const QModelIndex &index)
   if (!index.isValid())
   {
     qDebug() << "selected an index not in list...";
-    return new QWidget();
+    return nullptr;
   }
 
   Item *item = static_cast<Item*>(index.internalPointer());

@@ -21,13 +21,8 @@ Device::~Device()
 }
 
 
-QVariant Device::data(int column, int role) const
+QVariant Device::data(int /* unused */, int /* unused */) const
 {
-  if ( role == Qt::DisplayRole )
-  {
-    return "Device Name";
-  }
-
   return QVariant();
 }
 
@@ -44,8 +39,7 @@ int Device::select()
 
   for (int i = 0; tags[i]; i++)
   {
-    Card *newCard = new Card(tags[i], this);
-    this->addChild(newCard);
+    this->addChild(new Card(tags[i], this));
   }
 
   return this->childCount();
@@ -54,7 +48,6 @@ int Device::select()
 
 void Device::deselect()
 {
-  qDebug() << "deselect Device :-)";
   qDeleteAll(this->children);
   this->children.clear();
 

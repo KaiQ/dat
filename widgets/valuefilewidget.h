@@ -20,6 +20,9 @@ public:
 
 private:
   Ui::ValueFileWidget *ui;
+
+private slots:
+  void SaveValue();
 };
 
 #endif // VALUEFILEWIDGET_H

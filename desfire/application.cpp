@@ -1,8 +1,9 @@
 #include "application.h"
 #include "desfire/desfireFile.h"
+#include "widgets/applicationwidget.h"
 
 Application::Application(MifareDESFireAID _aid, Item* parent) :
-  Item(parent, new QPushButton("Application")),
+  Item(parent, new ApplicationWidget(nullptr)),
   aid(_aid)
 {
   this->name.sprintf("%06X", mifare_desfire_aid_get_aid(_aid));
@@ -21,7 +22,7 @@ Application::~Application()
 }
 
 
-QVariant Application::data(int column, int role) const
+QVariant Application::data(int /* unused */, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
@@ -32,7 +33,11 @@ QVariant Application::data(int column, int role) const
   return QVariant();
 }
 
-
+FreefareTag Application::getTag()
+{
+  Card *card = reinterpret_cast<Card *>(this->parent());
+  return card->getTag();
+}
 
 int Application::select()
 {

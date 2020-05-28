@@ -13,8 +13,8 @@ class Device : public Item
 {
 public:
   Device(nfc_device *_device = 0, Item* parent = 0);
-  ~Device();
-  QVariant data(int column, int role) const;
+  virtual ~Device();
+  QVariant data(int, int) const;
   int select();
   void deselect();
   nfc_device* getDevice();

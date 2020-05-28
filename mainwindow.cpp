@@ -48,10 +48,16 @@ void MainWindow::deviceSelect()
     device = nfc_open (this->context,devices[d]);
     deviceList << nfc_device_get_name(device);
     nfc_close(device);
-    device = NULL;
+    device = nullptr;
   }
 
-  QString choose = QInputDialog::getItem(this,tr("select Device"),tr("Devices:"),deviceList,0,false,&temp);
+  QString choose = QInputDialog::getItem(this,
+                                         tr("select Device"),
+                                         tr("Devices:"),
+                                         deviceList,
+                                         0,
+                                         false,
+                                         &temp);
 
   if (!temp)
   {
@@ -59,7 +65,8 @@ void MainWindow::deviceSelect()
   }
   // TODO close und modell aktualisieren
 
-  nfc_device *selectedDevice = nfc_open (this->context, devices[deviceList.indexOf(choose)]);
+  nfc_device *selectedDevice = nfc_open(this->context,
+                                        devices[deviceList.indexOf(choose)]);
   if (!selectedDevice)
   {
     ui->statusBar->showMessage(" Connecting to nfc device failed",5000);

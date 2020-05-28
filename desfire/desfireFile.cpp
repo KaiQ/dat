@@ -20,7 +20,11 @@ int DesfireFile::select()
 {
   if (mifare_desfire_get_file_settings(this->getTag(), filenumber, &settings) >= 0)
   {
-    reinterpret_cast<FileWidget*>(this->getWidget())->setupWidget(this);
+    FileWidget* widget = reinterpret_cast<FileWidget*>(this->getWidget());
+    if (widget)
+    {
+      widget->setupWidget(this);
+    }
   }
   return 0;
 }
@@ -45,7 +49,7 @@ uint8_t DesfireFile::getFilenumber()
   return filenumber;
 }
 
-QVariant DesfireFile::data(int column, int role) const
+QVariant DesfireFile::data(int /* unused */, int role) const
 {
   if ( role == Qt::DisplayRole )
   {

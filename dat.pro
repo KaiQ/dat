@@ -20,7 +20,9 @@ SOURCES +=  main.cpp\
             widgets/lrecordfilewidget.cpp \
             widgets/cardwidget.cpp \
             widgets/applicationwidget.cpp \
-            widgets/filewidget.cpp
+            widgets/filewidget.cpp \
+    GUI/createapplication.cpp \
+    GUI/keysettings.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -39,7 +41,9 @@ HEADERS  += mainwindow.h \
             widgets/cardwidget.h \
             widgets/applicationwidget.h \
             widgets/filewidget.h \
-            interface/fileinterface.h
+            interface/fileinterface.h \
+    GUI/createapplication.h \
+    GUI/keysettings.h
 
 FORMS    += GUI/mainwindow.ui \
             GUI/stdfilewidget.ui \
@@ -49,7 +53,9 @@ FORMS    += GUI/mainwindow.ui \
             GUI/crecordfilewidget.ui \
             GUI/cardwidget.ui \
             GUI/applicationwidget.ui \
-            GUI/filewidget.ui
+            GUI/filewidget.ui \
+    GUI/createapplication.ui \
+    GUI/keysettings.ui
 
 LIBS += -lnfc -lfreefare
 

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "desfire/card.h"
+#include "GUI/createapplication.h"
 
 namespace Ui {
   class CardWidget;
@@ -18,8 +19,12 @@ public:
 
   void setup(Card &card);
 
+private slots:
+  void OnClicked();
+
 private:
   Ui::CardWidget *ui;
+  CreateApplication createApplicationWidget;
 };
 
 #endif // CARDWIDGET_H

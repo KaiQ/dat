@@ -15,8 +15,8 @@ class DesfireFile : public Item
   public:
     DesfireFile(uint8_t filenumber,
         mifare_desfire_file_settings settings,
-        Item* parent = NULL);
-    ~DesfireFile();
+        Item* parent = nullptr);
+    virtual ~DesfireFile();
     int select();
     void deselect();
     FreefareTag getTag();

@@ -2,6 +2,8 @@
 #define APPLICATIONWIDGET_H
 
 #include <QWidget>
+#include <desfire/application.h>
+#include <GUI/keysettings.h>
 
 namespace Ui {
   class ApplicationWidget;
@@ -15,8 +17,11 @@ public:
   explicit ApplicationWidget(QWidget *parent = 0);
   ~ApplicationWidget();
 
+  void setup(Application &application);
+
 private:
   Ui::ApplicationWidget *ui;
+  KeySettings keySettings;
 };
 
 #endif // APPLICATIONWIDGET_H

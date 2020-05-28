@@ -6,6 +6,10 @@ ValueFileWidget::ValueFileWidget(DesfireFile &file) :
   ui(new Ui::ValueFileWidget)
 {
   ui->setupUi(this);
+  connect(ui->pushButton,
+          SIGNAL(pressed()),
+          this,
+          SLOT(SaveValue()));
 }
 
 ValueFileWidget::~ValueFileWidget()
@@ -22,4 +26,8 @@ void ValueFileWidget::setupWidget()
     return;
   }
   ui->lineEdit->setText(QString("%1").arg(value));
+}
+
+void ValueFileWidget::SaveValue()
+{
 }

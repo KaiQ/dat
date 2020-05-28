@@ -2,7 +2,7 @@
 #include "widgets/cardwidget.h"
 
 
-Card::Card(MifareTag _tag, Item* parent) :
+Card::Card(FreefareTag _tag, Item* parent) :
   Item(parent),
   tag(_tag)
 {
@@ -24,7 +24,7 @@ Card::~Card()
 }
 
 
-QVariant Card::data(int column, int role) const
+QVariant Card::data(int /* unused */, int role) const
 {
   if ( role == Qt::DisplayRole )
   {
@@ -47,15 +47,17 @@ int Card::select()
   mifare_desfire_get_application_ids (this->tag, &this->aids, &aid_count);
 
   qDebug() << QString("found %1 aids").arg(aid_count);
-  fflush(stdout);
 
   for (unsigned int i = 0; i < aid_count; i++ )
   {
-    Application *newApplication = new Application(this->aids[i], this);
-    this->addChild(newApplication);
+    this->addChild(new Application(this->aids[i], this));
   }
 
-  reinterpret_cast<CardWidget*>(this->getWidget())->setup(*this);
+  CardWidget* widget = reinterpret_cast<CardWidget*>(this->getWidget());
+  if (widget)
+  {
+    widget->setup(*this);
+  }
 
   return 0;
 }
@@ -63,14 +65,14 @@ int Card::select()
 
 void Card::deselect()
 {
-  qDebug() << "deselect Card";
-
   if (this->tag)
+  {
     mifare_desfire_disconnect(this->tag);
+  }
 }
 
 
-MifareTag Card::getTag()
+FreefareTag Card::getTag()
 {
   return this->tag;
 }
